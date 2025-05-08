@@ -1,0 +1,288 @@
+﻿year,data_class,data_field_display_name,data_field,county_name,month,full_fips,unit,uer_id,data_stream,utility_display_name,value,number_of_accounts,state_2
+2022,electricity,CCA Opt-Out Eligible Load,14_ny_policy_support,New York,8,36061,MW,3,county_monthly,Consolidated Edison,451000000,503060,NY
+2022,electricity,CCA Opt-Out Eligible Load,14_ny_policy_support,New York,9,36061,MW,3,county_monthly,Consolidated Edison,408000000,515404,NY
+2022,electricity,CCA Opt-Out Eligible Load,14_ny_policy_support,New York,12,36061,MW,3,county_monthly,Consolidated Edison,375000000,618823,NY
+2022,electricity,CCA Opt-Out Eligible Load,14_ny_policy_support,New York,10,36061,MW,3,county_monthly,Consolidated Edison,280000000,509500,NY
+2022,electricity,CCA Opt-Out Eligible Load,14_ny_policy_support,New York,11,36061,MW,3,county_monthly,Consolidated Edison,269000000,538033,NY
+2021,natural_gas,Total Consumption (T),6_nat_consumption,New York,12,36061,Therms,3,county_monthly,Consolidated Edison,244000000,1055795,NY
+2021,natural_gas,Total Consumption (T),6_nat_consumption,New York,11,36061,Therms,3,county_monthly,Consolidated Edison,236000000,1055524,NY
+2021,natural_gas,Total Consumption (T),6_nat_consumption,New York,10,36061,Therms,3,county_monthly,Consolidated Edison,218000000,1049389,NY
+2022,natural_gas,Total Consumption (T),6_nat_consumption,New York,6,36061,Therms,3,county_monthly,Consolidated Edison,203000000,1068487,NY
+2021,natural_gas,Residential Consumption (R),4_nat_consumption,New York,12,36061,Therms,3,county_monthly,Consolidated Edison,159000000,916925,NY
+2021,natural_gas,Residential Consumption (R),4_nat_consumption,New York,11,36061,Therms,3,county_monthly,Consolidated Edison,152000000,916704,NY
+2022,electricity,CCA Opt-Out Eligible Load,14_ny_policy_support,New York,7,36061,MW,3,county_monthly,Consolidated Edison,131000000,140492,NY
+2022,natural_gas,Residential Consumption (R),4_nat_consumption,New York,6,36061,Therms,3,county_monthly,Consolidated Edison,129000000,926499,NY
+2021,natural_gas,Residential Consumption (R),4_nat_consumption,New York,10,36061,Therms,3,county_monthly,Consolidated Edison,128000000,911711,NY
+2021,natural_gas,Total Consumption (T),6_nat_consumption,New York,9,36061,Therms,3,county_monthly,Consolidated Edison,127000000,1040799,NY
+2022,natural_gas,Total Consumption (T),6_nat_consumption,New York,5,36061,Therms,3,county_monthly,Consolidated Edison,126000000,1065252,NY
+2022,natural_gas,Residential Consumption (R),4_nat_consumption,Erie,2,36029,Therms,4,county_monthly,National Fuel Gas NY,113000000,393136,NY
+2022,natural_gas,Total Consumption (T),6_nat_consumption,Nassau,2,36059,Therms,5,county_monthly,National Grid,106000000,342526,NY
+2022,natural_gas,Residential Consumption (R),4_nat_consumption,Erie,1,36029,Therms,4,county_monthly,National Fuel Gas NY,103000000,393032,NY
+2023,electricity,ICAP Capacity Tag (C+I),13_ny_policy_support,New York,4,36061,MW,3,county_monthly,Consolidated Edison,102000000,4511,NY
+2022,electricity,CCA Opt-Out Eligible Load,14_ny_policy_support,Westchester,12,36119,MW,3,county_monthly,Consolidated Edison,100000000,172341,
+2022,electricity,CCA Opt-Out Eligible Load,14_ny_policy_support,Kings,8,36047,MW,3,county_monthly,Consolidated Edison,97000000,138839,
+2023,electricity,ICAP Capacity Tag (C+I),13_ny_policy_support,New York,5,36061,MW,3,county_monthly,Consolidated Edison,94400000,4985,NY
+2022,electricity,CCA Opt-Out Eligible Load,14_ny_policy_support,Kings,9,36047,MW,3,county_monthly,Consolidated Edison,94400000,141558,
+2023,natural_gas,Total Consumption (T),6_nat_consumption,Erie,1,36029,Therms,4,county_monthly,National Fuel Gas NY,94300000,393274,NY
+2022,natural_gas,Residential Consumption (R),4_nat_consumption,Erie,3,36029,Therms,4,county_monthly,National Fuel Gas NY,93700000,393199,NY
+2023,natural_gas,Total Consumption (T),6_nat_consumption,New York,2,36061,Therms,3,county_monthly,Consolidated Edison,91900000,311423,NY
+2023,natural_gas,Total Consumption (T),6_nat_consumption,New York,1,36061,Therms,3,county_monthly,Consolidated Edison,91800000,309617,NY
+2023,natural_gas,Total Consumption (T),6_nat_consumption,Erie,2,36029,Therms,4,county_monthly,National Fuel Gas NY,91100000,393573,NY
+2022,natural_gas,Total Consumption (T),6_nat_consumption,New York,4,36061,Therms,3,county_monthly,Consolidated Edison,90300000,1060309,NY
+2024,natural_gas,Total Consumption (T),6_nat_consumption,Erie,1,36029,Therms,4,county_monthly,National Fuel Gas NY,89840837.43,394243,NY
+2021,natural_gas,Non-Residential Consumption (C+I),5_nat_consumption,New York,10,36061,Therms,3,county_monthly,Consolidated Edison,89800000,137678,NY
+2024,natural_gas,Total Consumption (T),6_nat_consumption,Erie,2,36029,Therms,4,county_monthly,National Fuel Gas NY,89757671.64,394330,NY
+2021,natural_gas,Commercial Consumption (C),10_nat_consumption,New York,10,36061,Therms,3,county_monthly,Consolidated Edison,88400000,135313,NY
+2024,natural_gas,Total Consumption (T),6_nat_consumption,Nassau,2,36059,Therms,5,county_monthly,National Grid,88006758,347138,NY
+2022,natural_gas,Total Consumption (T),6_nat_consumption,Suffolk,2,36103,Therms,5,county_monthly,National Grid,87700000,255813,
+2022,natural_gas,Total Consumption (T),6_nat_consumption,Nassau,3,36059,Therms,5,county_monthly,National Grid,87000000,342525,NY
+2023,natural_gas,Total Consumption (T),6_nat_consumption,Nassau,1,36059,Therms,5,county_monthly,National Grid,86500000,344858,NY
+2023,natural_gas,Total Consumption (T),6_nat_consumption,Erie,3,36029,Therms,4,county_monthly,National Fuel Gas NY,86000000,393597,NY
+2024,natural_gas,Total Consumption (T),6_nat_consumption,New York,2,36061,Therms,3,county_monthly,Consolidated Edison,85964723,213898,NY
+2024,natural_gas,CCA Opt-Out Eligible Load,10_ny_policy_support,New York,2,36061,Therms,3,county_monthly,Consolidated Edison,85964723,213893,NY
+2021,natural_gas,Non-Residential Consumption (C+I),5_nat_consumption,New York,12,36061,Therms,3,county_monthly,Consolidated Edison,84900000,138870,NY
+2022,natural_gas,Total Consumption (T),6_nat_consumption,Nassau,1,36059,Therms,5,county_monthly,National Grid,84800000,342274,NY
+2023,natural_gas,Total Consumption (T),6_nat_consumption,New York,3,36061,Therms,3,county_monthly,Consolidated Edison,84100000,313670,NY
+2021,natural_gas,Non-Residential Consumption (C+I),5_nat_consumption,New York,11,36061,Therms,3,county_monthly,Consolidated Edison,84000000,138820,NY
+2021,natural_gas,Commercial Consumption (C),10_nat_consumption,New York,12,36061,Therms,3,county_monthly,Consolidated Edison,83400000,136487,NY
+2021,natural_gas,Commercial Consumption (C),10_nat_consumption,New York,11,36061,Therms,3,county_monthly,Consolidated Edison,82500000,136437,NY
+2022,electricity,CCA Opt-Out Eligible Load,14_ny_policy_support,Queens,8,36081,MW,3,county_monthly,Consolidated Edison,81700000,103604,NY
+2024,natural_gas,Total Consumption (T),6_nat_consumption,Nassau,1,36059,Therms,5,county_monthly,National Grid,81234924,346635,NY
+2022,natural_gas,CCA Opt-Out Eligible Load,10_ny_policy_support,Nassau,2,36059,Therms,5,county_monthly,National Grid,80600000,323842,NY
+2021,natural_gas,Total Consumption (T),6_nat_consumption,New York,7,36061,Therms,3,county_monthly,Consolidated Edison,80500000,1032209,NY
+2023,natural_gas,Total Consumption (T),6_nat_consumption,New York,12,36061,Therms,3,county_monthly,Consolidated Edison,80300000,215003,NY
+2023,natural_gas,CCA Opt-Out Eligible Load,10_ny_policy_support,New York,12,36061,Therms,3,county_monthly,Consolidated Edison,80300000,214995,NY
+2023,electricity,ICAP Capacity Tag (C+I),13_ny_policy_support,New York,6,36061,MW,3,county_monthly,Consolidated Edison,79900000,4910,NY
+2023,natural_gas,Total Consumption (T),6_nat_consumption,Nassau,2,36059,Therms,5,county_monthly,National Grid,79900000,345420,NY
+2021,natural_gas,Total Consumption (T),6_nat_consumption,New York,8,36061,Therms,3,county_monthly,Consolidated Edison,79600000,1035092,NY
+2022,natural_gas,Total Consumption (T),6_nat_consumption,Erie,12,36029,Therms,4,county_monthly,National Fuel Gas NY,78800000,393245,NY
+2024,natural_gas,Total Consumption (T),6_nat_consumption,Nassau,3,36059,Therms,5,county_monthly,National Grid,77849732,347338,NY
+2023,natural_gas,Total Consumption (T),6_nat_consumption,Nassau,3,36059,Therms,5,county_monthly,National Grid,77600000,345589,NY
+2022,natural_gas,Total Consumption (T),6_nat_consumption,New York,1,36061,Therms,3,county_monthly,Consolidated Edison,76800000,1042109,NY
+2024,natural_gas,Total Consumption (T),6_nat_consumption,Erie,3,36029,Therms,4,county_monthly,National Fuel Gas NY,76073948.11,394757,NY
+2024,natural_gas,Total Consumption (T),6_nat_consumption,New York,1,36061,Therms,3,county_monthly,Consolidated Edison,75969082,208814,NY
+2024,natural_gas,CCA Opt-Out Eligible Load,10_ny_policy_support,New York,1,36061,Therms,3,county_monthly,Consolidated Edison,75969082,208769,NY
+2021,natural_gas,Residential Consumption (R),4_nat_consumption,Erie,12,36029,Therms,4,county_monthly,National Fuel Gas NY,75900000,392890,NY
+2022,natural_gas,Total Consumption (T),6_nat_consumption,New York,3,36061,Therms,3,county_monthly,Consolidated Edison,74800000,1056081,NY
+2022,natural_gas,Total Consumption (T),6_nat_consumption,New York,12,36061,Therms,3,county_monthly,Consolidated Edison,74700000,316554,NY
+2024,natural_gas,Total Consumption (T),6_nat_consumption,Suffolk,2,36103,Therms,5,county_monthly,National Grid,74503281,261458,NY
+2023,electricity,ICAP Capacity Tag (C+I),13_ny_policy_support,Kings,5,36047,MW,3,county_monthly,Consolidated Edison,74200000,3402,
+2022,natural_gas,Residential Consumption (R),4_nat_consumption,Erie,4,36029,Therms,4,county_monthly,National Fuel Gas NY,74200000,393479,NY
+2023,natural_gas,Total Consumption (T),6_nat_consumption,Erie,12,36029,Therms,4,county_monthly,National Fuel Gas NY,73900000,393825,NY
+2022,natural_gas,Non-Residential Consumption (C+I),5_nat_consumption,New York,6,36061,Therms,3,county_monthly,Consolidated Edison,73800000,141988,NY
+2023,electricity,ICAP Capacity Tag (C+I),13_ny_policy_support,Kings,4,36047,MW,3,county_monthly,Consolidated Edison,73300000,3285,
+2022,natural_gas,Total Consumption (T),6_nat_consumption,Erie,2,36029,Therms,4,county_monthly,National Fuel Gas NY,73000000,361435,NY
+2022,natural_gas,CCA Opt-Out Eligible Load,10_ny_policy_support,Erie,2,36029,Therms,4,county_monthly,National Fuel Gas NY,73000000,370116,NY
+2022,natural_gas,Commercial Consumption (C),10_nat_consumption,New York,6,36061,Therms,3,county_monthly,Consolidated Edison,72300000,139643,NY
+2022,natural_gas,Total Consumption (T),6_nat_consumption,New York,2,36061,Therms,3,county_monthly,Consolidated Edison,71900000,1049350,NY
+2022,natural_gas,Total Consumption (T),6_nat_consumption,Suffolk,3,36103,Therms,5,county_monthly,National Grid,71900000,255940,
+2021,natural_gas,CCA Opt-Out Eligible Load,10_ny_policy_support,Kings,12,36047,Therms,5,county_monthly,National Grid,71700000,661679,
+2022,electricity,CCA Opt-Out Eligible Load,14_ny_policy_support,Queens,9,36081,MW,3,county_monthly,Consolidated Edison,71400000,105571,
+2024,natural_gas,Total Consumption (T),6_nat_consumption,New York,3,36061,Therms,3,county_monthly,Consolidated Edison,71330629,209187,NY
+2024,natural_gas,CCA Opt-Out Eligible Load,10_ny_policy_support,New York,3,36061,Therms,3,county_monthly,Consolidated Edison,71330629,209185,NY
+2023,natural_gas,Total Consumption (T),6_nat_consumption,Suffolk,1,36103,Therms,5,county_monthly,National Grid,70700000,258215,
+2023,natural_gas,Total Consumption (T),6_nat_consumption,Nassau,12,36059,Therms,5,county_monthly,National Grid,70600000,346620,NY
+2024,natural_gas,CCA Opt-Out Eligible Load,10_ny_policy_support,Nassau,2,36059,Therms,5,county_monthly,National Grid,69963163,332092,NY
+2022,electricity,CCA Opt-Out Eligible Load,14_ny_policy_support,Kings,12,36047,MW,3,county_monthly,Consolidated Edison,69900000,146345,
+2023,natural_gas,Total Consumption (T),6_nat_consumption,Erie,4,36029,Therms,4,county_monthly,National Fuel Gas NY,69500000,393745,NY
+2023,natural_gas,Total Consumption (T),6_nat_consumption,Suffolk,3,36103,Therms,5,county_monthly,National Grid,69400000,258762,
+2022,natural_gas,Total Consumption (T),6_nat_consumption,Suffolk,1,36103,Therms,5,county_monthly,National Grid,69400000,255573,
+2022,natural_gas,Total Consumption (T),6_nat_consumption,Nassau,4,36059,Therms,5,county_monthly,National Grid,69400000,340850,NY
+2022,natural_gas,CCA Opt-Out Eligible Load,10_ny_policy_support,Erie,1,36029,Therms,4,county_monthly,National Fuel Gas NY,68600000,370076,NY
+2022,natural_gas,Total Consumption (T),6_nat_consumption,Erie,1,36029,Therms,4,county_monthly,National Fuel Gas NY,68400000,361197,NY
+2022,natural_gas,Residential Consumption (R),4_nat_consumption,Nassau,2,36059,Therms,5,county_monthly,National Grid,68200000,314204,NY
+2023,natural_gas,Total Consumption (T),6_nat_consumption,Suffolk,2,36103,Therms,5,county_monthly,National Grid,67900000,258635,
+2024,natural_gas,Total Consumption (T),6_nat_consumption,Erie,4,36029,Therms,4,county_monthly,National Fuel Gas NY,67881140.59,395030,NY
+2024,natural_gas,Total Consumption (T),6_nat_consumption,Suffolk,1,36103,Therms,5,county_monthly,National Grid,67612541,260762,NY
+2021,natural_gas,Residential Consumption (R),4_nat_consumption,New York,9,36061,Therms,3,county_monthly,Consolidated Edison,67600000,904762,NY
+2023,natural_gas,CCA Opt-Out Eligible Load,10_ny_policy_support,Nassau,1,36059,Therms,5,county_monthly,National Grid,67600000,328546,NY
+2022,electricity,CCA Opt-Out Eligible Load,14_ny_policy_support,Westchester,8,36119,MW,3,county_monthly,Consolidated Edison,67200000,77034,
+2022,natural_gas,Residential Consumption (R),4_nat_consumption,New York,5,36061,Therms,3,county_monthly,Consolidated Edison,66900000,924099,NY
+2022,electricity,CCA Opt-Out Eligible Load,14_ny_policy_support,Westchester,11,36119,MW,3,county_monthly,Consolidated Edison,66600000,148921,
+2024,natural_gas,Total Consumption (T),6_nat_consumption,Suffolk,3,36103,Therms,5,county_monthly,National Grid,66385973,261736,NY
+2022,natural_gas,CCA Opt-Out Eligible Load,10_ny_policy_support,Nassau,3,36059,Therms,5,county_monthly,National Grid,65600000,323971,NY
+2022,electricity,CCA Opt-Out Eligible Load,14_ny_policy_support,Kings,10,36047,MW,3,county_monthly,Consolidated Edison,65100000,139803,
+2022,natural_gas,CCA Opt-Out Eligible Load,10_ny_policy_support,Suffolk,2,36103,Therms,5,county_monthly,National Grid,65100000,243157,
+2024,natural_gas,CCA Opt-Out Eligible Load,10_ny_policy_support,Nassau,1,36059,Therms,5,county_monthly,National Grid,63435715,331557,NY
+2023,natural_gas,Total Consumption (T),6_nat_consumption,Bronx,1,36005,Therms,3,county_monthly,Consolidated Edison,63200000,302320,NY
+2024,natural_gas,Total Consumption (T),6_nat_consumption,New York,4,36061,Therms,3,county_monthly,Consolidated Edison,62982063,205349,NY
+2024,natural_gas,CCA Opt-Out Eligible Load,10_ny_policy_support,New York,4,36061,Therms,3,county_monthly,Consolidated Edison,62982063,205344,NY
+2023,natural_gas,CCA Opt-Out Eligible Load,10_ny_policy_support,Erie,1,36029,Therms,4,county_monthly,National Fuel Gas NY,62400000,364860,NY
+2022,natural_gas,CCA Opt-Out Eligible Load,10_ny_policy_support,Nassau,1,36059,Therms,5,county_monthly,National Grid,62400000,323588,NY
+2023,natural_gas,CCA Opt-Out Eligible Load,10_ny_policy_support,Nassau,2,36059,Therms,5,county_monthly,National Grid,62100000,329124,NY
+2021,natural_gas,Total Consumption (T),6_nat_consumption,Bronx,12,36005,Therms,3,county_monthly,Consolidated Edison,61800000,299899,NY
+2021,natural_gas,Total Consumption (T),6_nat_consumption,Bronx,11,36005,Therms,3,county_monthly,Consolidated Edison,61800000,299899,NY
+2023,natural_gas,Residential Consumption (R),4_nat_consumption,Erie,1,36029,Therms,4,county_monthly,National Fuel Gas NY,61700000,370352,NY
+2023,natural_gas,Total Consumption (T),6_nat_consumption,Bronx,2,36005,Therms,3,county_monthly,Consolidated Edison,61500000,302902,NY
+2023,natural_gas,CCA Opt-Out Eligible Load,10_ny_policy_support,Nassau,3,36059,Therms,5,county_monthly,National Grid,60800000,329481,NY
+2023,natural_gas,Total Consumption (T),6_nat_consumption,Nassau,4,36059,Therms,5,county_monthly,National Grid,60400000,345562,NY
+2024,natural_gas,CCA Opt-Out Eligible Load,10_ny_policy_support,Nassau,3,36059,Therms,5,county_monthly,National Grid,60314065,332349,NY
+2024,natural_gas,CCA Opt-Out Eligible Load,10_ny_policy_support,Erie,1,36029,Therms,4,county_monthly,National Fuel Gas NY,59994147.37,367407,NY
+2024,natural_gas,Total Consumption (T),6_nat_consumption,Nassau,4,36059,Therms,5,county_monthly,National Grid,59769788,347542,NY
+2021,natural_gas,Non-Residential Consumption (C+I),5_nat_consumption,New York,9,36061,Therms,3,county_monthly,Consolidated Edison,59700000,136037,NY
+2022,natural_gas,Total Consumption (T),6_nat_consumption,Suffolk,4,36103,Therms,5,county_monthly,National Grid,59500000,254976,
+2023,natural_gas,CCA Opt-Out Eligible Load,10_ny_policy_support,Erie,2,36029,Therms,4,county_monthly,National Fuel Gas NY,59400000,365299,NY
+2022,natural_gas,Total Consumption (T),6_nat_consumption,Erie,3,36029,Therms,4,county_monthly,National Fuel Gas NY,59300000,361677,NY
+2024,natural_gas,Residential Consumption (R),4_nat_consumption,Erie,1,36029,Therms,4,county_monthly,National Fuel Gas NY,59113955.96,371185,NY
+2022,natural_gas,CCA Opt-Out Eligible Load,10_ny_policy_support,Erie,3,36029,Therms,4,county_monthly,National Fuel Gas NY,59100000,370164,NY
+2022,natural_gas,Non-Residential Consumption (C+I),5_nat_consumption,New York,5,36061,Therms,3,county_monthly,Consolidated Edison,58900000,141153,NY
+2021,natural_gas,Commercial Consumption (C),10_nat_consumption,New York,9,36061,Therms,3,county_monthly,Consolidated Edison,58800000,133704,NY
+2023,natural_gas,Total Consumption (T),6_nat_consumption,New York,4,36061,Therms,3,county_monthly,Consolidated Edison,58700000,311514,NY
+2023,natural_gas,Residential Consumption (R),4_nat_consumption,Erie,2,36029,Therms,4,county_monthly,National Fuel Gas NY,58700000,370598,NY
+2024,natural_gas,Residential Consumption (R),4_nat_consumption,Nassau,2,36059,Therms,5,county_monthly,National Grid,58366863,319002,NY
+2022,natural_gas,Commercial Consumption (C),10_nat_consumption,New York,5,36061,Therms,3,county_monthly,Consolidated Edison,58100000,138802,NY
+2024,natural_gas,CCA Opt-Out Eligible Load,10_ny_policy_support,Erie,2,36029,Therms,4,county_monthly,National Fuel Gas NY,57990987.86,367504,NY
+2024,natural_gas,Total Consumption (T),6_nat_consumption,Bronx,2,36005,Therms,3,county_monthly,Consolidated Edison,57977849,262722,NY
+2024,natural_gas,CCA Opt-Out Eligible Load,10_ny_policy_support,Bronx,2,36005,Therms,3,county_monthly,Consolidated Edison,57977849,262718,NY
+2023,natural_gas,Total Consumption (T),6_nat_consumption,Suffolk,4,36103,Therms,5,county_monthly,National Grid,57900000,258776,
+2022,electricity,CCA Opt-Out Eligible Load,14_ny_policy_support,Westchester,9,36119,MW,3,county_monthly,Consolidated Edison,57700000,81036,
+2023,natural_gas,Total Consumption (T),6_nat_consumption,Bronx,3,36005,Therms,3,county_monthly,Consolidated Edison,57600000,303756,NY
+2023,natural_gas,Total Consumption (T),6_nat_consumption,Suffolk,12,36103,Therms,5,county_monthly,National Grid,57400000,260439,
+2024,natural_gas,Residential Consumption (R),4_nat_consumption,Erie,2,36029,Therms,4,county_monthly,National Fuel Gas NY,57170144.37,371242,NY
+2023,natural_gas,Residential Consumption (R),4_nat_consumption,Nassau,1,36059,Therms,5,county_monthly,National Grid,56900000,316652,NY
+2023,natural_gas,CCA Opt-Out Eligible Load,10_ny_policy_support,Erie,3,36029,Therms,4,county_monthly,National Fuel Gas NY,55900000,365605,NY
+2023,natural_gas,Total Consumption (T),6_nat_consumption,Westchester,1,36119,Therms,3,county_monthly,Consolidated Edison,55500000,237858,
+2022,natural_gas,Residential Consumption (R),4_nat_consumption,Nassau,3,36059,Therms,5,county_monthly,National Grid,55300000,314212,NY
+2023,natural_gas,Residential Consumption (R),4_nat_consumption,Erie,3,36029,Therms,4,county_monthly,National Fuel Gas NY,55200000,370620,NY
+2021,natural_gas,Total Consumption (T),6_nat_consumption,Westchester,12,36119,Therms,3,county_monthly,Consolidated Edison,54900000,236426,
+2022,electricity,CCA Opt-Out Eligible Load,14_ny_policy_support,Queens,12,36081,MW,3,county_monthly,Consolidated Edison,54500000,107422,
+2021,natural_gas,Total Consumption (T),6_nat_consumption,Bronx,10,36005,Therms,3,county_monthly,Consolidated Edison,54100000,299632,NY
+2024,natural_gas,Non-Residential Consumption (C+I),5_nat_consumption,New York,2,36061,Therms,3,county_monthly,Consolidated Edison,54047203,40757,NY
+2024,natural_gas,Total Consumption (T),6_nat_consumption,Westchester,2,36119,Therms,3,county_monthly,Consolidated Edison,54029680,215647,NY
+2024,natural_gas,CCA Opt-Out Eligible Load,10_ny_policy_support,Westchester,2,36119,Therms,3,county_monthly,Consolidated Edison,54029680,215642,NY
+2022,electricity,CCA Opt-Out Eligible Load,14_ny_policy_support,Bronx,8,36005,MW,3,county_monthly,Consolidated Edison,53800000,70221,NY
+2023,natural_gas,Total Consumption (T),6_nat_consumption,Oswego,2,36075,Therms,5,county_monthly,National Grid,53800000,24254,NY
+2023,natural_gas,Non-Residential Consumption (C+I),5_nat_consumption,Oswego,2,36075,Therms,5,county_monthly,National Grid,53500000,1886,NY
+2024,natural_gas,Commercial Consumption (C),10_nat_consumption,New York,2,36061,Therms,3,county_monthly,Consolidated Edison,53447320,40185,NY
+2023,natural_gas,Industrial Consumption (I),11_nat_consumption,Oswego,2,36075,Therms,5,county_monthly,National Grid,53100000,10,NY
+2024,natural_gas,Residential Consumption (R),4_nat_consumption,Nassau,1,36059,Therms,5,county_monthly,National Grid,53081382,318551,NY
+2022,natural_gas,Residential Consumption (R),4_nat_consumption,Nassau,1,36059,Therms,5,county_monthly,National Grid,52900000,314010,NY
+2023,natural_gas,CCA Opt-Out Eligible Load,10_ny_policy_support,Nassau,12,36059,Therms,5,county_monthly,National Grid,52800000,331422,NY
+2023,natural_gas,Total Consumption (T),6_nat_consumption,Westchester,2,36119,Therms,3,county_monthly,Consolidated Edison,52600000,238179,
+2022,electricity,CCA Opt-Out Eligible Load,14_ny_policy_support,Kings,11,36047,MW,3,county_monthly,Consolidated Edison,52600000,125700,
+2024,natural_gas,Total Consumption (T),6_nat_consumption,New York,6,36061,Therms,3,county_monthly,Consolidated Edison,52572737,196084,NY
+2024,natural_gas,CCA Opt-Out Eligible Load,10_ny_policy_support,New York,6,36061,Therms,3,county_monthly,Consolidated Edison,52572737,196070,NY
+2022,natural_gas,Total Consumption (T),6_nat_consumption,Bronx,12,36005,Therms,3,county_monthly,Consolidated Edison,52500000,302510,NY
+2022,natural_gas,Total Consumption (T),6_nat_consumption,Bronx,6,36005,Therms,3,county_monthly,Consolidated Edison,52500000,302510,NY
+2023,natural_gas,Residential Consumption (R),4_nat_consumption,New York,1,36061,Therms,3,county_monthly,Consolidated Edison,52400000,260881,NY
+2022,natural_gas,CCA Opt-Out Eligible Load,10_ny_policy_support,Erie,12,36029,Therms,4,county_monthly,National Fuel Gas NY,52400000,363782,NY
+2022,natural_gas,Residential Consumption (R),4_nat_consumption,Erie,12,36029,Therms,4,county_monthly,National Fuel Gas NY,52400000,370311,NY
+2024,natural_gas,Total Consumption (T),6_nat_consumption,Suffolk,4,36103,Therms,5,county_monthly,National Grid,52327086,261997,NY
+2023,natural_gas,Non-Residential Consumption (C+I),5_nat_consumption,New York,12,36061,Therms,3,county_monthly,Consolidated Edison,52100000,41668,NY
+2023,natural_gas,CCA Opt-Out Eligible Load,10_ny_policy_support,Suffolk,1,36103,Therms,5,county_monthly,National Grid,51900000,247474,
+2023,natural_gas,Residential Consumption (R),4_nat_consumption,Nassau,2,36059,Therms,5,county_monthly,National Grid,51900000,317092,NY
+2023,natural_gas,Commercial Consumption (C),10_nat_consumption,New York,12,36061,Therms,3,county_monthly,Consolidated Edison,51500000,41077,NY
+2023,natural_gas,Total Consumption (T),6_nat_consumption,Bronx,12,36005,Therms,3,county_monthly,Consolidated Edison,51500000,265240,NY
+2023,natural_gas,CCA Opt-Out Eligible Load,10_ny_policy_support,Bronx,12,36005,Therms,3,county_monthly,Consolidated Edison,51500000,265229,NY
+2023,natural_gas,Residential Consumption (R),4_nat_consumption,Nassau,3,36059,Therms,5,county_monthly,National Grid,50800000,317251,NY
+2022,natural_gas,CCA Opt-Out Eligible Load,10_ny_policy_support,Suffolk,3,36103,Therms,5,county_monthly,National Grid,50700000,243395,
+2023,natural_gas,Residential Consumption (R),4_nat_consumption,New York,2,36061,Therms,3,county_monthly,Consolidated Edison,50500000,262231,NY
+2024,natural_gas,Residential Consumption (R),4_nat_consumption,Nassau,3,36059,Therms,5,county_monthly,National Grid,50463073,319173,NY
+2023,electricity,ICAP Capacity Tag (C+I),13_ny_policy_support,New York,3,36061,MW,3,county_monthly,Consolidated Edison,50400000,1403,NY
+2024,natural_gas,Total Consumption (T),6_nat_consumption,Oswego,4,36075,Therms,5,county_monthly,National Grid,49691506,24354,NY
+2021,natural_gas,CCA Opt-Out Eligible Load,10_ny_policy_support,Erie,12,36029,Therms,4,county_monthly,National Fuel Gas NY,49100000,369995,NY
+2024,natural_gas,Total Consumption (T),6_nat_consumption,Westchester,1,36119,Therms,3,county_monthly,Consolidated Edison,49081342,215950,NY
+2024,natural_gas,CCA Opt-Out Eligible Load,10_ny_policy_support,Westchester,1,36119,Therms,3,county_monthly,Consolidated Edison,49081342,215884,NY
+2023,natural_gas,Total Consumption (T),6_nat_consumption,Westchester,3,36119,Therms,3,county_monthly,Consolidated Edison,49000000,238586,
+2024,natural_gas,Total Consumption (T),6_nat_consumption,Bronx,1,36005,Therms,3,county_monthly,Consolidated Edison,48910575,262923,NY
+2024,natural_gas,CCA Opt-Out Eligible Load,10_ny_policy_support,Bronx,1,36005,Therms,3,county_monthly,Consolidated Edison,48910575,262905,NY
+2024,natural_gas,CCA Opt-Out Eligible Load,10_ny_policy_support,Erie,3,36029,Therms,4,county_monthly,National Fuel Gas NY,48798795.96,368069,NY
+2023,natural_gas,CCA Opt-Out Eligible Load,10_ny_policy_support,Erie,12,36029,Therms,4,county_monthly,National Fuel Gas NY,48500000,366812,NY
+2021,natural_gas,Total Consumption (T),6_nat_consumption,Erie,12,36029,Therms,4,county_monthly,National Fuel Gas NY,48500000,360817,NY
+2024,natural_gas,Total Consumption (T),6_nat_consumption,Bronx,3,36005,Therms,3,county_monthly,Consolidated Edison,48486925,260536,NY
+2024,natural_gas,CCA Opt-Out Eligible Load,10_ny_policy_support,Bronx,3,36005,Therms,3,county_monthly,Consolidated Edison,48486925,260533,NY
+2022,natural_gas,Total Consumption (T),6_nat_consumption,New York,11,36061,Therms,3,county_monthly,Consolidated Edison,48400000,314834,NY
+2022,natural_gas,Non-Residential Consumption (C+I),5_nat_consumption,New York,4,36061,Therms,3,county_monthly,Consolidated Edison,48300000,139880,NY
+2023,natural_gas,Total Consumption (T),6_nat_consumption,New York,9,36061,Therms,3,county_monthly,Consolidated Edison,48200000,194379,NY
+2023,natural_gas,CCA Opt-Out Eligible Load,10_ny_policy_support,New York,9,36061,Therms,3,county_monthly,Consolidated Edison,48200000,194379,NY
+2024,natural_gas,Residential Consumption (R),4_nat_consumption,Erie,3,36029,Therms,4,county_monthly,National Fuel Gas NY,48063856.13,371609,NY
+2023,natural_gas,Residential Consumption (R),4_nat_consumption,Erie,12,36029,Therms,4,county_monthly,National Fuel Gas NY,48000000,370824,NY
+2022,natural_gas,CCA Opt-Out Eligible Load,10_ny_policy_support,Suffolk,1,36103,Therms,5,county_monthly,National Grid,48000000,242829,
+2021,natural_gas,Total Consumption (T),6_nat_consumption,Westchester,11,36119,Therms,3,county_monthly,Consolidated Edison,47600000,236206,
+2021,natural_gas,Total Consumption (T),6_nat_consumption,Westchester,10,36119,Therms,3,county_monthly,Consolidated Edison,47600000,236206,
+2023,natural_gas,Residential Consumption (R),4_nat_consumption,New York,3,36061,Therms,3,county_monthly,Consolidated Edison,47600000,263915,NY
+2022,natural_gas,Commercial Consumption (C),10_nat_consumption,New York,4,36061,Therms,3,county_monthly,Consolidated Edison,47600000,137535,NY
+2022,natural_gas,CCA Opt-Out Eligible Load,10_ny_policy_support,Nassau,4,36059,Therms,5,county_monthly,National Grid,47500000,317808,NY
+2024,natural_gas,Non-Residential Consumption (C+I),5_nat_consumption,Oswego,4,36075,Therms,5,county_monthly,National Grid,47425639,1896,NY
+2022,natural_gas,Residential Consumption (R),4_nat_consumption,Erie,5,36029,Therms,4,county_monthly,National Fuel Gas NY,47400000,393719,NY
+2023,natural_gas,CCA Opt-Out Eligible Load,10_ny_policy_support,Suffolk,2,36103,Therms,5,county_monthly,National Grid,47200000,247911,
+2023,natural_gas,CCA Opt-Out Eligible Load,10_ny_policy_support,Suffolk,3,36103,Therms,5,county_monthly,National Grid,47000000,248210,
+2023,natural_gas,Total Consumption (T),6_nat_consumption,New York,10,36061,Therms,3,county_monthly,Consolidated Edison,46900000,206654,NY
+2023,natural_gas,CCA Opt-Out Eligible Load,10_ny_policy_support,New York,10,36061,Therms,3,county_monthly,Consolidated Edison,46900000,206637,NY
+2024,natural_gas,CCA Opt-Out Eligible Load,10_ny_policy_support,Suffolk,2,36103,Therms,5,county_monthly,National Grid,46683363,214676,NY
+2023,natural_gas,Total Consumption (T),6_nat_consumption,Westchester,12,36119,Therms,3,county_monthly,Consolidated Edison,46500000,217028,NY
+2023,natural_gas,CCA Opt-Out Eligible Load,10_ny_policy_support,Westchester,12,36119,Therms,3,county_monthly,Consolidated Edison,46500000,217017,NY
+2022,electricity,CCA Opt-Out Eligible Load,14_ny_policy_support,Queens,10,36081,MW,3,county_monthly,Consolidated Edison,46500000,104301,
+2024,natural_gas,Non-Residential Consumption (C+I),5_nat_consumption,New York,1,36061,Therms,3,county_monthly,Consolidated Edison,46389835,39001,NY
+2022,natural_gas,CCA Opt-Out Eligible Load,10_ny_policy_support,Erie,4,36029,Therms,4,county_monthly,National Fuel Gas NY,46300000,370416,NY
+2024,natural_gas,CCA Opt-Out Eligible Load,10_ny_policy_support,Nassau,4,36059,Therms,5,county_monthly,National Grid,46260452,332640,NY
+2023,natural_gas,Total Consumption (T),6_nat_consumption,New York,8,36061,Therms,3,county_monthly,Consolidated Edison,45900000,196571,NY
+2023,natural_gas,CCA Opt-Out Eligible Load,10_ny_policy_support,New York,8,36061,Therms,3,county_monthly,Consolidated Edison,45900000,196571,NY
+2022,natural_gas,Residential Consumption (R),4_nat_consumption,New York,12,36061,Therms,3,county_monthly,Consolidated Edison,45900000,266706,NY
+2022,natural_gas,Total Consumption (T),6_nat_consumption,Erie,4,36029,Therms,4,county_monthly,National Fuel Gas NY,45900000,362175,NY
+2024,natural_gas,Industrial Consumption (I),11_nat_consumption,Oswego,4,36075,Therms,5,county_monthly,National Grid,45858176,10,NY
+2023,electricity,ICAP Capacity Tag (C+I),13_ny_policy_support,Kings,6,36047,MW,3,county_monthly,Consolidated Edison,45800000,3178,
+2024,natural_gas,Commercial Consumption (C),10_nat_consumption,New York,1,36061,Therms,3,county_monthly,Consolidated Edison,45798323,38446,NY
+2021,natural_gas,Non-Residential Consumption (C+I),5_nat_consumption,New York,7,36061,Therms,3,county_monthly,Consolidated Edison,45600000,135042,NY
+2022,natural_gas,Residential Consumption (R),4_nat_consumption,Suffolk,2,36103,Therms,5,county_monthly,National Grid,45600000,224346,
+2023,natural_gas,CCA Opt-Out Eligible Load,10_ny_policy_support,Nassau,4,36059,Therms,5,county_monthly,National Grid,45400000,329698,NY
+2024,natural_gas,Non-Residential Consumption (C+I),5_nat_consumption,New York,3,36061,Therms,3,county_monthly,Consolidated Edison,45356944,39645,NY
+2023,natural_gas,Total Consumption (T),6_nat_consumption,Erie,11,36029,Therms,4,county_monthly,National Fuel Gas NY,45300000,392045,NY
+2023,natural_gas,Total Consumption (T),6_nat_consumption,New York,11,36061,Therms,3,county_monthly,Consolidated Edison,45200000,209072,NY
+2023,natural_gas,CCA Opt-Out Eligible Load,10_ny_policy_support,New York,11,36061,Therms,3,county_monthly,Consolidated Edison,45200000,209052,NY
+2024,natural_gas,Total Consumption (T),6_nat_consumption,Oswego,1,36075,Therms,5,county_monthly,National Grid,45009945,24345,NY
+2024,natural_gas,Total Consumption (T),6_nat_consumption,Westchester,3,36119,Therms,3,county_monthly,Consolidated Edison,44939808,214192,NY
+2024,natural_gas,CCA Opt-Out Eligible Load,10_ny_policy_support,Westchester,3,36119,Therms,3,county_monthly,Consolidated Edison,44939808,214190,NY
+2021,natural_gas,Commercial Consumption (C),10_nat_consumption,New York,7,36061,Therms,3,county_monthly,Consolidated Edison,44900000,132735,NY
+2021,natural_gas,CCA Opt-Out Eligible Load,10_ny_policy_support,Queens,12,36081,Therms,5,county_monthly,National Grid,44900000,362464,
+2024,natural_gas,Commercial Consumption (C),10_nat_consumption,New York,3,36061,Therms,3,county_monthly,Consolidated Edison,44816570,39076,NY
+2022,natural_gas,Total Consumption (T),6_nat_consumption,Westchester,12,36119,Therms,3,county_monthly,Consolidated Edison,44800000,237970,
+2022,natural_gas,Total Consumption (T),6_nat_consumption,Westchester,6,36119,Therms,3,county_monthly,Consolidated Edison,44800000,237970,
+2021,natural_gas,Non-Residential Consumption (C+I),5_nat_consumption,New York,8,36061,Therms,3,county_monthly,Consolidated Edison,44800000,134896,NY
+2021,natural_gas,Total Consumption (T),6_nat_consumption,Oswego,9,36075,Therms,5,county_monthly,National Grid,44700000,24216,
+2022,electricity,CCA Opt-Out Eligible Load,14_ny_policy_support,Bronx,9,36005,MW,3,county_monthly,Consolidated Edison,44500000,71351,NY
+2021,natural_gas,Non-Residential Consumption (C+I),5_nat_consumption,Oswego,9,36075,Therms,5,county_monthly,National Grid,44400000,1878,
+2023,natural_gas,Residential Consumption (R),4_nat_consumption,Nassau,12,36059,Therms,5,county_monthly,National Grid,44300000,318547,NY
+2021,natural_gas,Commercial Consumption (C),10_nat_consumption,New York,8,36061,Therms,3,county_monthly,Consolidated Edison,44100000,132586,NY
+2021,natural_gas,Industrial Consumption (I),11_nat_consumption,Oswego,9,36075,Therms,5,county_monthly,National Grid,44000000,11,
+2022,natural_gas,Non-Residential Consumption (C+I),5_nat_consumption,New York,3,36061,Therms,3,county_monthly,Consolidated Edison,43900000,139246,NY
+2022,natural_gas,Non-Residential Consumption (C+I),5_nat_consumption,New York,1,36061,Therms,3,county_monthly,Consolidated Edison,43900000,136617,NY
+2024,natural_gas,Total Consumption (T),6_nat_consumption,New York,5,36061,Therms,3,county_monthly,Consolidated Edison,43579549,194757,NY
+2024,natural_gas,CCA Opt-Out Eligible Load,10_ny_policy_support,New York,5,36061,Therms,3,county_monthly,Consolidated Edison,43579549,194753,NY
+2022,natural_gas,Total Consumption (T),6_nat_consumption,Nassau,5,36059,Therms,5,county_monthly,National Grid,43400000,342695,NY
+2022,natural_gas,Commercial Consumption (C),10_nat_consumption,New York,3,36061,Therms,3,county_monthly,Consolidated Edison,43300000,136922,NY
+2022,natural_gas,Commercial Consumption (C),10_nat_consumption,New York,1,36061,Therms,3,county_monthly,Consolidated Edison,43300000,134351,NY
+2023,natural_gas,Total Consumption (T),6_nat_consumption,Erie,5,36029,Therms,4,county_monthly,National Fuel Gas NY,43200000,393081,NY
+2022,natural_gas,Non-Residential Consumption (C+I),5_nat_consumption,New York,2,36061,Therms,3,county_monthly,Consolidated Edison,43100000,137784,NY
+2024,natural_gas,CCA Opt-Out Eligible Load,10_ny_policy_support,Erie,4,36029,Therms,4,county_monthly,National Fuel Gas NY,42965933.65,368573,NY
+2022,natural_gas,Total Consumption (T),6_nat_consumption,Erie,11,36029,Therms,4,county_monthly,National Fuel Gas NY,42900000,391916,NY
+2023,natural_gas,CCA Opt-Out Eligible Load,10_ny_policy_support,Erie,4,36029,Therms,4,county_monthly,National Fuel Gas NY,42800000,366095,NY
+2022,natural_gas,Total Consumption (T),6_nat_consumption,Suffolk,5,36103,Therms,5,county_monthly,National Grid,42700000,255961,
+2022,natural_gas,Commercial Consumption (C),10_nat_consumption,New York,2,36061,Therms,3,county_monthly,Consolidated Edison,42600000,135498,NY
+2024,natural_gas,Residential Consumption (R),4_nat_consumption,Erie,4,36029,Therms,4,county_monthly,National Fuel Gas NY,42537293.4,371897,NY
+2023,natural_gas,Residential Consumption (R),4_nat_consumption,Erie,4,36029,Therms,4,county_monthly,National Fuel Gas NY,42500000,370785,NY
+2024,natural_gas,CCA Opt-Out Eligible Load,10_ny_policy_support,Suffolk,1,36103,Therms,5,county_monthly,National Grid,42363062,213658,NY
+2024,natural_gas,Non-Residential Consumption (C+I),5_nat_consumption,Oswego,1,36075,Therms,5,county_monthly,National Grid,42310239,1889,NY
+2021,natural_gas,Residential Consumption (R),4_nat_consumption,Erie,11,36029,Therms,4,county_monthly,National Fuel Gas NY,42300000,391726,NY
+2023,electricity,ICAP Capacity Tag (C+I),13_ny_policy_support,Westchester,4,36119,MW,3,county_monthly,Consolidated Edison,42200000,1154,
+2022,natural_gas,Residential Consumption (R),4_nat_consumption,New York,4,36061,Therms,3,county_monthly,Consolidated Edison,42000000,920429,NY
+2022,natural_gas,Non-Residential Consumption (C+I),5_nat_consumption,Suffolk,2,36103,Therms,5,county_monthly,National Grid,42000000,31467,
+2022,natural_gas,Commercial Consumption (C),10_nat_consumption,Suffolk,2,36103,Therms,5,county_monthly,National Grid,42000000,31467,
+2023,natural_gas,Total Consumption (T),6_nat_consumption,Oswego,3,36075,Therms,5,county_monthly,National Grid,41800000,24246,NY
+2023,natural_gas,Non-Residential Consumption (C+I),5_nat_consumption,New York,2,36061,Therms,3,county_monthly,Consolidated Edison,41500000,49192,NY
+2023,natural_gas,Non-Residential Consumption (C+I),5_nat_consumption,Oswego,3,36075,Therms,5,county_monthly,National Grid,41400000,1868,NY
+2024,natural_gas,CCA Opt-Out Eligible Load,10_ny_policy_support,Suffolk,3,36103,Therms,5,county_monthly,National Grid,41304971,215282,NY
+2024,natural_gas,Non-Residential Consumption (C+I),5_nat_consumption,New York,4,36061,Therms,3,county_monthly,Consolidated Edison,41117488,39136,NY
+2023,natural_gas,Total Consumption (T),6_nat_consumption,New York,7,36061,Therms,3,county_monthly,Consolidated Edison,41100000,187052,NY
+2023,natural_gas,CCA Opt-Out Eligible Load,10_ny_policy_support,New York,7,36061,Therms,3,county_monthly,Consolidated Edison,41100000,187052,NY
+2023,natural_gas,Industrial Consumption (I),11_nat_consumption,Oswego,3,36075,Therms,5,county_monthly,National Grid,41100000,10,NY
+2023,natural_gas,Total Consumption (T),6_nat_consumption,Queens,1,36081,Therms,3,county_monthly,Consolidated Edison,40900000,209555,
+2022,natural_gas,Residential Consumption (R),4_nat_consumption,Nassau,4,36059,Therms,5,county_monthly,National Grid,40900000,312697,NY
+2023,natural_gas,Commercial Consumption (C),10_nat_consumption,New York,2,36061,Therms,3,county_monthly,Consolidated Edison,40800000,48471,NY
+2023,electricity,ICAP Capacity Tag (C+I),13_ny_policy_support,Queens,4,36081,MW,3,county_monthly,Consolidated Edison,40700000,2405,
+2024,natural_gas,Commercial Consumption (C),10_nat_consumption,New York,4,36061,Therms,3,county_monthly,Consolidated Edison,40694136,38595,NY
+2024,natural_gas,Total Consumption (T),6_nat_consumption,Bronx,4,36005,Therms,3,county_monthly,Consolidated Edison,40610603,259856,NY
+2024,natural_gas,CCA Opt-Out Eligible Load,10_ny_policy_support,Bronx,4,36005,Therms,3,county_monthly,Consolidated Edison,40610603,259854,NY
+2024,natural_gas,Industrial Consumption (I),11_nat_consumption,Oswego,1,36075,Therms,5,county_monthly,National Grid,40553483,10,NY
+2023,natural_gas,Total Consumption (T),6_nat_consumption,Bronx,4,36005,Therms,3,county_monthly,Consolidated Edison,40300000,303125,NY
+2024,natural_gas,Total Consumption (T),6_nat_consumption,Queens,2,36081,Therms,3,county_monthly,Consolidated Edison,40219884,185549,NY
