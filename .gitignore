@@ -1,0 +1,15 @@
+# Ignore directories
+data/
+__pycache__/
+bin/
+lib*/
+libs/
+share/
+
+# Ignore files
+Pip*
+*delete*
+/.env
+pyvenv*
+
+
