@@ -752,6 +752,7 @@ def main():
     start_year = "2021"
     end_year = "2024"
     weather_data = get_weather_data(lat, lon, start_year, end_year)
+    breakpoint()
 
     # Confirm API call
 #    assert weather_data, "NASA POWER API returned jack shit!"
