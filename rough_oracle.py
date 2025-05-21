@@ -529,46 +529,6 @@ def get_weather_data(latitude, longitude, start_year, end_year):
     
     return data
 
-def get_weather_df(weather_data):
-    """
-    Takes the raw weather data and configures it such that a proper dataframe
-    is outputn with the appropriate information.
-    ------------------------------------------------------
-    INPUT:
-        weather_data: (dict) Dictionary of information from the NASA Power API
-
-    OUTPUT:
-        (pd.DataFrame) Datetime converted dataframe merged with weather dataframe
-    """
-    # Getting the appropriate dictionaries
-    humidity = weather_data["properties"]["parameter"]["RH2M"]
-    temp = weather_data["properties"]["parameter"]["T2M"]
-    wind_speed = weather_data["properties"]["parameter"]["WS10M"]
-    solar_radiation = weather_data["properties"]["parameter"]["ALLSKY_SFC_SW_DWN"]
-
-    # Getting proper weather dataframes
-    humidity_df = pd.DataFrame(list(humidity.items()), columns=["date",
-                                                                "humidity%"])
-    temp_df = pd.DataFrame(list(temp.items()), columns=["date", "temp (°C)"])
-    wind_speed_df = pd.DataFrame(list(wind_speed.items()), columns=["date",
-                                                                    "speed (m/s)"])
-    solar_radiation_df = pd.DataFrame(list(solar_radiation.items()),
-                                      columns=["date", "W/m²"])
-
-    # List of dataframes
-    dfs = [humidity_df, temp_df, solar_radiation_df, wind_speed_df]
-
-    # Initialize with same columns as source DataFrames
-    weather_df = pd.DataFrame(columns=['date'] + ['humidity%', 'temp (°C)', 'speed (m/s)', 'solar radiation (W/m²)'])
-
-    # Using merge_weather_dataframes function for combining dataframes
-    proper_weather_df = merge_weather_dataframes(dfs)
-    # Merge validation
-    print(proper_weather_df.head())
-
-    # Convert any date-related columns to datetime 
-    return datetime_conversion(proper_weather_df)
-
 def datetime_conversion(dataframe, sort_by_date=True):
     """
     Looks for a 'date' type column and converts it to datetime.
@@ -784,7 +744,6 @@ Missing Values: \n{dc.dataframe.isnull().sum()}
 
 def main():
     # Read Energy dataset
-    # ? --> Replace this with a C++ GUI for user to make selection ?
     df = \
     read_data("data/raw/Utility_Energy_Registry_Monthly_County_Energy_Use__Beginning_2021_20241208.csv")
 
@@ -819,16 +778,16 @@ def main():
     merged_df = merge_energy_weather_location(cleaned_energy_df,
                                               cleaned_weather_df)
     # Plot energy by location with weather overlay
-    plot_energy_by_location(merged_df)
-    
-    # Additional analysis as needed
-    print("\nLocation-based statistics: ")
-    location_stats = merged_df.groupby("county_name")["value"].agg(['mean', 'std', 'min', 'max'])
-    print(location_stats)
-
-    # Save the merged dataset if needed
-    merged_df.to_csv("data/processed/energy_weather_location_data.csv", index=False)
-    
+#    plot_energy_by_location(merged_df)
+#    
+#    # Additional analysis as needed
+#    print("\nLocation-based statistics: ")
+#    location_stats = merged_df.groupby("county_name")["value"].agg(['mean', 'std', 'min', 'max'])
+#    print(location_stats)
+#
+#    # Save the merged dataset if needed
+#    merged_df.to_csv("data/processed/energy_weather_location_data.csv", index=False)
+#    
     # Summary with the top 10 
 #    summary = dc.column_summary(10)
 #    print(f"\nSummary DataFrame:\n {summary}")

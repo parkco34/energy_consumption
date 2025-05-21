@@ -9,12 +9,14 @@ import requests
 
 class NASAPowerAPI:
     def __init__(self):
+        # Base URL used for accessing API
         self.base_url = "https://power.larc.nasa.gov/api/temporal/daily/point"
 
     def get_weather_data(self, lat, lon, start_year, end_year):
         """
         Fetch historical weather & solar data from NASA POWER API.
-
+        
+        ---------------------------------------------------------------
         INPUT:
             lat (float): Latitude.
             lon (float): Longitude.
@@ -26,6 +28,7 @@ class NASAPowerAPI:
         """
         params = {
             "parameters": "T2M,RH2M,WS10M,ALLSKY_SFC_SW_DWN",  # Temp, humidity, wind, solar
+            # Dates need month and day concatenated at the end
             "start": f"{start_year}0101",
             "end": f"{end_year}1231",
             "latitude": lat,
@@ -34,13 +37,17 @@ class NASAPowerAPI:
             "format": "JSON"
         }
 
+        # Sends a get request: requests.get(url, params=None, *kwargs)
+        # params: Dictionary , list or tuples or bytes to send in query string
         response = requests.get(self.base_url, params=params)
-
+        
         if response.status_code == 200:
             return response.json()
         else:
             print(f"Error: {response.status_code}, {response.text}")
             return None
+
+
 
 # Example Usage
 #if __name__ == "__main__":
