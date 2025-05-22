@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-#!/usr/bin/env python
 """
 Oracle Project
 """
@@ -91,6 +90,8 @@ def get_weather_data(coordinates, year_range):
    
     except Exception as e:
         print(f"Something went wrong: {e}")
+
+
 
 df = read_data("data/raw/Utility_Energy_Registry_Monthly_County_Energy_Use__Beginning_2021_20241208.csv")
 
