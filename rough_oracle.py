@@ -751,7 +751,6 @@ def main():
     start_year = "2021"
     end_year = "2024"
     weather_data = get_weather_data(lat, lon, start_year, end_year)
-    breakpoint()
 
     # Confirm API call
 #    assert weather_data, "NASA POWER API returned jack shit!"
@@ -759,6 +758,7 @@ def main():
     # Weather dataframe
     weather_df = get_weather_dataframe(weather_data)
    
+    breakpoint()
     # Filter dataframe via FIPS (location: Rochester area)
     filter_by_fips = [36051, 36053, 36055]
 

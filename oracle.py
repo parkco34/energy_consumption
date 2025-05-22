@@ -4,7 +4,7 @@ Oracle Project
 """
 import os
 from data_utils.data_cleaning import DataCleaning
-from nasa_power_api import NASAPowerAPI as napi # Import NASA API Class
+from nasa_power_api import NASAPowerAPI as api # Import NASA API Class
 import pandas as pd
 # Tk Provides access to the Tcl interpreter.
 # Each widget attached to same instance of Tk has same value for its tk attribute
