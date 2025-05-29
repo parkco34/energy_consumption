@@ -58,13 +58,7 @@ class NASAPowerAPI:
             dict: JSON response containing weather & solar data.
         """
         # Loop through the dictionary, getting each parameter
-        # I need coordinates, temp, and index by dates
-        for key, item in self.base_urls.items():
-            req = requests.get(item)
-            text = req.json()
-            feature = text["features"]
-            param_values = feature[0]["properties"].values()
-            breakpoint()
+        for item in self.base_urls.items():
 
 
 
