@@ -41,16 +41,14 @@ class NASAPowerAPI:
         for idx, param in enumerate(self.parameters):
             self.base_urls[idx] = f"https://power.larc.nasa.gov/api/temporal/monthly/regional?start=2001&end=2024&latitude-min=42&latitude-max=44&longitude-min=-78&longitude-max=-76&community=re&parameters={param}&format=json&user=parkdaddy&header=true&time-standard=lst"
 
-    def get_weather_data(self, start_year, end_year):
+    def get_weather_data(self, url, start_year, end_year):
         """
         Fetch historical weather & solar data from NASA POWER API.
         Paramaters:
             T2M,T2M_MAX,T2M_MIN,PRECTOTCORR,RH2M,ALLSKY_SFC_SW_DWN,CLOUD_AMT,WS10M,GWETROOT,QV2M,T2MWET
         -------------------------------------------------------------------------------------------------
         INPUT:
-            param: (str) Parameter 
-            lat (float): Latitude.
-            lon (float): Longitude.
+            ur: (str) URL for given parameter
             start_year (str): Start year (YYYY).
             end_year (str): End year (YYYY).
 
@@ -58,12 +56,20 @@ class NASAPowerAPI:
             dict: JSON response containing weather & solar data.
         """
         # Loop through the dictionary, getting each parameter
-        # I need coordinates, temp, and index by dates
-        for key, item in self.base_urls.items():
-            req = requests.get(item)
-            text = req.json()
-            feature = text["features"]
-            param_values = feature[0]["properties"].values()
+        # I need coordinates, temp, and index by dates and columns should be
+        # the parameters
+        req = requests.get(item)
+        text = req.json()
+        feat = text["features"][0]
+        # Get values from parameter
+        param_dict = feat["propoerties"]["parameter"]
+        columns = []
+        # Iterate thru dictionary items to create pandas Series
+        for name, vals in param_dict.items():
+            series = pd.Series(val, name=name)
+            # Create datetime index
+            series.index = pd.to_datetime(series.index, format="%Y%m")
+            columns.append(series)
             breakpoint()
 
 
