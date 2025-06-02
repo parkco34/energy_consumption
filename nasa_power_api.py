@@ -24,6 +24,7 @@ ALLSKY_SFC_SW_DWN → Solar radiation (W/m²)
 """
 import pandas as pd
 import requests
+import re
 
 class NASAPowerAPI:
     def __init__(self, parameters, min_lat, max_lat, min_lon, max_lon):
@@ -36,41 +37,57 @@ class NASAPowerAPI:
         # Base URL used for accessing API, looping through each relevant
         # parameter, where I need to replace 'param' with the actual
         # parameter(s) to be used for the REGION... Storing the shit in a
-        # dictionary
         self.base_urls = {}
-        for idx, param in enumerate(self.parameters):
-            self.base_urls[idx] = f"https://power.larc.nasa.gov/api/temporal/monthly/regional?start=2001&end=2024&latitude-min=42&latitude-max=44&longitude-min=-78&longitude-max=-76&community=re&parameters={param}&format=json&user=parkdaddy&header=true&time-standard=lst"
+        for param in self.parameters:
+            self.base_urls[param] = \
+            f"https://power.larc.nasa.gov/api/temporal/monthly/regional?start=2001&end=2024&latitude-min={self.min_lat}&latitude-max={self.max_lat}&longitude-min={self.min_lon}&longitude-max={self.max_lon}&community=re&parameters={param}&format=json&user=parkdaddy&header=true&time-standard=lst"
 
-    def get_weather_data(self, url, start_year, end_year):
+    def get_weather_data(self, start_year, end_year):
         """
         Fetch historical weather & solar data from NASA POWER API.
         Paramaters:
             T2M,T2M_MAX,T2M_MIN,PRECTOTCORR,RH2M,ALLSKY_SFC_SW_DWN,CLOUD_AMT,WS10M,GWETROOT,QV2M,T2MWET
         -------------------------------------------------------------------------------------------------
         INPUT:
-            ur: (str) URL for given parameter
             start_year (str): Start year (YYYY).
             end_year (str): End year (YYYY).
 
         OUTPUT:
-            dict: JSON response containing weather & solar data.
+            df: (pd.DataFrame) Dataframe with datetime index
         """
-        # Loop through the dictionary, getting each parameter
-        # I need coordinates, temp, and index by dates and columns should be
-        # the parameters
-        req = requests.get(item)
-        text = req.json()
-        feat = text["features"][0]
-        # Get values from parameter
-        param_dict = feat["propoerties"]["parameter"]
-        columns = []
-        # Iterate thru dictionary items to create pandas Series
-        for name, vals in param_dict.items():
-            series = pd.Series(val, name=name)
-            # Create datetime index
-            series.index = pd.to_datetime(series.index, format="%Y%m")
-            columns.append(series)
-            breakpoint()
+        # Store json data in pandas Series in List
+        all_series = []
+
+        # Iterate thru parameters via url and request that shit
+        for param, url in self.base_urls.items():
+            res = requests.get(url)
+            # Raise error for bad status
+            res.raise_for_status()
+            
+            # Get json data form
+            data = res.json()
+
+            try:
+                # Get parameter data
+                param_data = data["features"][0]["properties"]["parameter"]
+
+            except KeyError:
+                print(f"Data missing for parameter: {param}")
+                # Go to next item
+                continue
+
+            # Iterate thru names and values of parameter data
+            for name, val in param_data.items():
+                # Filter for clean date values
+                for date in val.keys():
+                    # If greater than 12, discard
+                    if int(date[-2:]) > 12:
+                        continue
+
+                    # Convert to Series and parse dates
+                    series = pd.Series(val, name=name)
+                    breakpoint()
+                    series.index = pd.to_datetime(series.index, format="%Y%m")
 
 
 
@@ -78,7 +95,6 @@ parameters = ["T2M,T2M_MAX,T2M_MIN,PRECTOTCORR,RH2M,ALLSKY_SFC_SW_DWN,CLOUD_AMT,
 # For REGION
 min_lat, max_lat, min_lon, max_lon = 42, 44, -78, -76
 nasa = NASAPowerAPI(parameters, min_lat, max_lat, min_lon, max_lon)
-#lat, lon = 43.1566, -77.6088  # Rochester, NY
 weather = nasa.get_weather_data(2001, 2024)
 
 
