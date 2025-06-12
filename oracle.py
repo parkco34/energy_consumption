@@ -42,12 +42,17 @@ def datetime_conversion(dataframe, sort_by_date=True):
         new_df: (pd.DataFrame) Datetime converted dataframe
     """
     # Create a copy of dataframe
+    df = dataframe.copy()
 
-    # List of common date-related keywords
+    # List of common date-related keywords for columns
+    date_keywords = ["month", "year", "date", "day"]
 
-    # Track columns that were converted
+    # Initiate emptry to track converted columns 
+    converted_cols = []
 
-    # CHeck if separate year, month, day columns
+    # CHeck if separate year and/or month rolumns
+    month_col = any("month" for col in df.columns)
+    year_col = any("year" for col in df.columns)
 
     # If separate year and month columns, try ti create datetime columns
             # get correct column names via list comprehension, extracting first element from the list
