@@ -37,14 +37,22 @@ class NASAPowerAPI:
     """
     def __init__(self,
                  parameters,
-                 min_lat,
-                 max_lat,
-                 min_lon,
-                 max_lon
+                 coordinates,
+                 year_range
                 ):
-        self.min_lat, self.max_lat, self.min_lon, self.max_lon =  (
-            min_lat, max_lat, min_lon, max_lon
-        )
+        # Unpack tuple of coordinates
+        self.min_lat, self.max_lat, self.min_lon, self.max_lon =  coordinates
+        # Unpack year range
+        self.start_year, self.end_year = year_range
+        """
+        INPUT:
+            parameters: (list)
+            coordinates; (tuple)
+            year_range: (tuple)
+
+        OUTPUT:
+            None
+        """
 
         # parameter list
         self.parameters = parameters[0].split(",")
@@ -111,7 +119,7 @@ class NASAPowerAPI:
             print(f"Error fetching {param}: {e}")
             return []
 
-    async def fetch_weather_data(self, start_year, end_year):
+    async def fetch_weather_data(self):
         """
         Asynchronoulsy collect all parameters into one DataFrame
         """
@@ -130,11 +138,11 @@ class NASAPowerAPI:
         # Concatenate into one DataFrame
         df = pd.concat(all_series, axis=1)
         # Range relevant to the start and end years
-        df = df[(df.index.year >= start_year) & (df.index.year <= end_year)]
+        df = df[(df.index.year >= self.start_year) & (df.index.year <= self.end_year)]
 
         return df
 
-    def get_weather_data(self, start_year, end_year):
+    def get_weather_data(self):
         """
         Fetch historical weather & solar data from NASA POWER API.Add commentMore actions
         Paramaters:
@@ -147,14 +155,14 @@ class NASAPowerAPI:
         OUTPUT:
             df: (pd.DataFrame) Weather dataframe with correspoding parameters
         """
-        df = asyncio.run(self.fetch_weather_data(start_year, end_year))
+        df = asyncio.run(self.fetch_weather_data())
 
         return df
 
 
 
-parameters = ["T2M,T2M_MAX,T2M_MIN,PRECTOTCORR,RH2M,"
-              "ALLSKY_SFC_SW_DWN,CLOUD_AMT,WS10M,GWETROOT,QV2M,T2MWET"]
-nasa = NASAPowerAPI(parameters, 42, 44, -78, -76)
-weather = nasa.get_weather_data(2001, 2024)
-print(weather.head())
+#parameters = ["T2M,T2M_MAX,T2M_MIN,PRECTOTCORR,RH2M,"
+#              "ALLSKY_SFC_SW_DWN,CLOUD_AMT,WS10M,GWETROOT,QV2M,T2MWET"]
+#nasa = NASAPowerAPI(parameters, 42, 44, -78, -76)
+#weather = nasa.get_weather_data(2001, 2024)
+#print(weather.head())
