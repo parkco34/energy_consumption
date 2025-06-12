@@ -79,10 +79,10 @@ def get_weather_data(coordinates, year_range):
         year_range: (tuple) start_year/end_year
 
     OUTPUT:
-        data: (dict) Dictionary of raw weather data
+        ?
     """
     # Unpack coordinate tuple into latitude/longitude
-    lat, lon = coordinates
+    min_lat, max_lat, min_lon, max_lon = coordinates
     # Unpack year_range into start/end dates, if valid
     try:
         # unpacking
