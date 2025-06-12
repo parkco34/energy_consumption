@@ -51,17 +51,34 @@ def datetime_conversion(dataframe, sort_by_date=True):
     converted_cols = []
 
     # CHeck if separate year and/or month rolumns
-    month_col = any("month" for col in df.columns)
-    year_col = any("year" for col in df.columns)
+    has_month = any("month" for col in df.columns)
+    has_year = any("year" for col in df.columns)
 
-    # If separate year and month columns, try ti create datetime columns
-            # get correct column names via list comprehension, extracting first element from the list
+    # If separate year and month columns, try to create datetime columns
+    if has_year and has_month:
+        try:
+        # get correct column names via list comprehension, extracting first element from the list
+            year_col = [col for col in df.columns if col.lower() ==
+                        "year"][0]
+            month_col = [col for col in df.columns if col.lower() ==
+                         "month"][0]
 
-            # Create new 'date' column if none exists
-
+            # Create new 'date' column if none exists!
+            if "date" not in df.columns:
                 # if there's a 'day' column, use it!
+                if any("day" in col.lower() for col in df.columns):
+                    day_col = [col.lower() for col in df.columns if col.lower()
+                              == "day"][0]
+
+                    df["date"] = pd.to_datetime(
+                       df[year_col].astype(str) + "-" +
+                        df[month_col].astype(str).str.zfill(2) + "-" +
+                        df["day"].astype(str).str.zfill(2),
+                        errors=coerce
+                    )
                 
                 # If no day column, use the 8th day of the month
+                
 
                 # Append converted columns to the list
 
