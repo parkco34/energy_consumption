@@ -54,34 +54,40 @@ def datetime_conversion(dataframe, sort_by_date=True):
     has_month = any("month" for col in df.columns)
     has_year = any("year" for col in df.columns)
 
+# get correct column names via list comprehension, extracting first element from the list
+    year_col = [col for col in df.columns if col.lower() ==
+                "year"][0]
+    month_col = [col for col in df.columns if col.lower() ==
+                 "month"][0]
+
     # If separate year and month columns, try to create datetime columns
     if has_year and has_month:
         try:
-        # get correct column names via list comprehension, extracting first element from the list
-            year_col = [col for col in df.columns if col.lower() ==
-                        "year"][0]
-            month_col = [col for col in df.columns if col.lower() ==
-                         "month"][0]
-
             # Create new 'date' column if none exists!
             if "date" not in df.columns:
-                # if there's a 'day' column, use it!
-                if any("day" in col.lower() for col in df.columns):
-                    day_col = [col.lower() for col in df.columns if col.lower()
-                              == "day"][0]
+                
+                if "day" in df.columns:
+                    # Obtain the 'day' column name
+                    day_col = [col for col in df.columns if col.lower() ==
+                               "day"][0]
 
+                    # Includes the 'day' conversion
                     df["date"] = pd.to_datetime(
-                       df[year_col].astype(str) + "-" +
+                        df[year_col].astype(str) + "-" +
                         df[month_col].astype(str).str.zfill(2) + "-" +
-                        df["day"].astype(str).str.zfill(2),
-                        errors=coerce
-                    )
-                
+                        df[day_col].astype(str).str.zfill(2), 
+                        errors="coerce"
+                )
+            
+            else:
                 # If no day column, use the 8th day of the month
-                
+                df["date"] = pd.to_datetime(df[year_col].astype(str) + "-" +
+                                            df[month_col].astype(str).str.zfill(2)
+                                           + "-" + "08", errors="coerce")
 
-                # Append converted columns to the list
-
+        except Exception as e:
+            print(f"Failed to create 'date' column: {e}")
+    breakpoint() 
     # Process each column that might contain date information
 
         # Skip columns we've already processed
@@ -106,7 +112,7 @@ def datetime_conversion(dataframe, sort_by_date=True):
 
     # Reset index
 
-    return new_df
+    pass
 
 
 def get_weather_data(parameters, coordinates, year_range):
@@ -137,5 +143,6 @@ def get_weather_data(parameters, coordinates, year_range):
 energy_df = read_energy_data("data/raw/Utility_Energy_Registry_Monthly_County_Energy_Use__Beginning_2021_20241208.csv")
 weather_df = get_weather_data(["T2M,T2M_MAX,T2M_MIN,PRECTOTCORR,RH2M,"
               "ALLSKY_SFC_SW_DWN,CLOUD_AMT,WS10M,GWETROOT,QV2M,T2MWET"], (42, 44, -78, -76), (2001, 2024))
-breakpoint()
+conversion = datetime_conversion(energy_df)
+
 print(f"Execution time: {time.time() - start}")
