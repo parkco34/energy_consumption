@@ -9,6 +9,9 @@ import os
 from nasa_power_api import NASAPowerAPI as api # Import NASA API Class
 import pandas as pd
 
+# List of common date-related keywords for columns
+DATE_KEYWORDS = ["month", "year", "date", "day", "time"]
+
 def read_energy_data(filename):
     """
     Reads dataset (csv file)
@@ -43,83 +46,64 @@ def datetime_conversion(dataframe, sort_by_date=True):
     # Create a copy of dataframe
     df = dataframe.copy()
 
-    # List of common date-related keywords for columns
-    DATE_KEYWORDS = ["month", "year", "date", "day"]
-
-    # If separate month and year, since those are what this script is
-    # intereted in ...
-    has_month = any(col for col in df.columns if col.lower() == "month")
-    has_year = any(col for col in df.columns if col.lower() == "year")
-
     # Ensure that the index isn't already datetime and any date-like columns
     # aren't already datetime !
     # !-> If this is the case, return the original dataframe so as to preserve
     # memory!
     if isinstance(df.index, pd.DatetimeIndex):
-        # get list of columns to remove from dataframe
-        remove_cols = [col for col in df.columns if col in DATE_KEYWORDS]
-
-        # If there no other date-like columns, nevermind
-        if not remove_cols:
-            return dataframe
-
-        else:
-        # If there are, remove them inplace, returning the copy
+        # Remove date-like columns since the dataframe is already setup with a
+        # datetime index
         # pdf.drop(labels=None, *, axis=0, index=None, columns=None, level=None, inplace=False, errors='raise')
-            df.drop(remove_cols, axis=1, inplace=True)
+        df.drop(cols, axis=1, inplace=True)
 
-            return df
-    
-    # Separate date-like columns
-    if has_month and has_year:
-        # Get column name without knowing where it is via list comprehension,
-        # only including the first instance
-        month_col = [col.lower() for col in df.columns if col.lower() ==
-                     "month"][0]
-        year_col = [col.lower() for col in df.columns if col.lower() ==
-                    "year"][0]
+        return df
 
-        # Determine if there's a 'day' column
-        if not "day" in df.columns:
-            # add an arbtitrary day to the date for fromatting purposes
-            # .str -> Accessor used to apply string methods to each element in
-            # the Series
-            df["date"] = pd.to_datetime(
-                df[year_col].astype(str) + "-" +
-                df[month_col].astype(str).str.zfill(2) +  "-"
-                "08",
-                format="%Y-%m-%d",
-                errors="coerce"
-            )
+    # Isolate the relevant column names, if any
+    year_col = [col.lower() for col in df.columns]
+    month_col =  [col.lower() for col in df.columns if col.lower() == "month"]
 
-        else:
-            # 'day' column exists; get column name via list comprehension
-            day_col = [col.lower for col in df.columns if col.lower() ==
-                       "day"][0]
+    try: # ? -> Refactor!
+        # Separate year and month at least
+        if year_col and month_col:
+            # If there's no 'date' column, make it
+            if "date" not in df.columns:
+                # Check for a 'day' column
+                if any("day" in col.lower() for col in df.columns):
+                    day_col = [col.lower() for col in df.columns if col.lower()
+                              == "day"][0]
+                    # Convert to datetime
+                    df["date"] = pd.to_datetime(
+                        df[year_col].astype(str) + "-" + 
+                        df[month_col].astype(str).str.zfill(2) + "-" +
+                        df[day_col].astype(str).str.zfill(2),
+                        format="%Y-%m-%d",
+                        errors="coerce"
+                    )
 
-            df["date"] = pd.to_datetime(
-                df[year_col].astype(str) + "-" +
-                df[month_col].astype(str).str.zfill(2) +  "-" +
-                df[day_col].astype(str).str.zfill(2),
-                format="%Y-%m-%d",
-                errors="coerce"
-            )
+                else:
+                    # No 'day' column
+                    df["date"] = pd.to_datetime(
+                        df[year_col].astype(str) + "-" +
+                        # MOnth will need to often prepend a '0' for two-digit
+                        # month
+                        df[month_col].astype(str).str.zfill(2) + "-" +
+                        "08", # day
+                        format="%Y-%m-%d",
+                        errors="coerce" # Invalid items set as NaT
+                    )
 
-    # Date-like columns are not separate
-    elif has_month or has_year:
-        pass
+            elif year_col and (not month_col):
+                df["date"] = pd.to_datetime(
+                    df[year_col].astype(str) + "-" +
+                    "06" + "-" + # Arbitrary month
+                    "08", # Arbitrary day
+                    format="%Y-%m-%d",
+                    errors="coerce"
+                )
 
 
-    # Determine date-like columns and datatypes and whether they're separate or
-    # together (year, month, or YYmm, etc.)
-
-    # Convert date-like columns accordingly to datetime
-
-    # Make the datetime column the index and remove the date-like columns
-
-    # Return new dataframe like a ( ͡° ͜ʖ ͡°  ) boss 
-    pass
-
+    except Exception as e:
+        print(f"Issue with converting to datetime! {e}")
 
 def get_weather_data(parameters, coordinates, year_range):
     """
@@ -142,6 +126,7 @@ def get_weather_data(parameters, coordinates, year_range):
    
     except Exception as e:
         print(f"Something went wrong: {e}")
+        return None
 
 
 
