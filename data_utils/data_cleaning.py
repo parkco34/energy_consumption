@@ -343,6 +343,12 @@ class DataCleaning(object):
     def detect_outliers(self, column):
         """
         Identifies potential outliers using the IQR method
+        ------------------------------------------------
+        INPUT:
+            column: (str) Column name
+
+        OUTPUT:
+            outliers: ()
         """
         q1 = self.dataframe[column].quantile(0.25)
         q3 = self.dataframe[column].quantile(0.75)

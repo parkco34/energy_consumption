@@ -53,7 +53,6 @@ class NASAPowerAPI:
         OUTPUT:
             None
         """
-
         # parameter list
         self.parameters = parameters[0].split(",")
 
@@ -79,7 +78,8 @@ class NASAPowerAPI:
             url: (str) 
 
         OUTPUT:
-            
+            series_list: (list) List of pd.Series or an empty list if requests
+            are not effective
         """
         try:
                 # res: class aiohttp.client_reqrep.ClientResponse: Client Response  
@@ -139,6 +139,9 @@ class NASAPowerAPI:
         df = pd.concat(all_series, axis=1)
         # Range relevant to the start and end years
         df = df[(df.index.year >= self.start_year) & (df.index.year <= self.end_year)]
+
+        # Sort in descending order
+        df = df.sort_index(ascending=False)
 
         return df
 
