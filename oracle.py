@@ -213,17 +213,23 @@ def combine_dataframes(dataframe1, dataframe2):
     dframe = pd.concat([dataframe1, dataframe2], axis=0)
     return dframe
 
+def main():
+    # Get dataframes
+    energy_df = read_energy_data("data/raw/Utility_Energy_Registry_Monthly_County_Energy_Use__Beginning_2021_20241208.csv")
+    weather_df = _get_weather_data(["T2M,T2M_MAX,T2M_MIN,PRECTOTCORR,RH2M,"
+                  "ALLSKY_SFC_SW_DWN,CLOUD_AMT,WS10M,GWETROOT,QV2M,T2MWET"], (42, 44, -78, -76), (2001, 2024))
 
-energy_df = read_energy_data("data/raw/Utility_Energy_Registry_Monthly_County_Energy_Use__Beginning_2021_20241208.csv")
-weather_df = _get_weather_data(["T2M,T2M_MAX,T2M_MIN,PRECTOTCORR,RH2M,"
-              "ALLSKY_SFC_SW_DWN,CLOUD_AMT,WS10M,GWETROOT,QV2M,T2MWET"], (42, 44, -78, -76), (2001, 2024))
-proper_energy_df = make_datetime_index(energy_df)
+    # Convert to datetime index
+    proper_energy_df = make_datetime_index(energy_df)
 
-# Merge dataframes int o one main dataframe
-dframe = combine_dataframes(proper_energy_df, weather_df)
+    # Merge dataframes int o one main dataframe
+    dframe = combine_dataframes(proper_energy_df, weather_df)
 
-# Clean the data plz
-clean_obj = DataCleaning(dframe)
-breakpoint()
+    # Clean the data plz
+    clean_obj = DataCleaning(dframe)
+    col_summary = clean_obj.column_summary()
 
+
+if __name__ == "__main__":
+    main()
 print(f"Execution time: {time.time() - start}")
