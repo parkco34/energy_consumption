@@ -3,7 +3,6 @@
 Oracle Project
 """
 import time
-start = time.time()
 import os
 #from data_utils.data_cleaning import DataCleaning
 from nasa_power_api import NASAPowerAPI as api # Import NASA API Class
@@ -195,7 +194,7 @@ def _get_weather_data(parameters, coordinates, year_range):
         print(f"Something went wrong: {e}")
         return None
 
-def combine_dataframes(dataframe1, dataframe2):
+def combine_dataframes(energy_df, weather_df):
     """
     Combines the two dataframes using
         'pd..concat(objs, *, axis=0, join='outer', ignore_index=False, 
@@ -203,15 +202,23 @@ def combine_dataframes(dataframe1, dataframe2):
         sort=False, copy=None)'
         ---------------------------------------------------------------
         INPUT:
-            dataframe1: (pd.DataFrame) Energy dataframe in this case
-            dataframe2: (pd.DataFrame) Weather dataframe in this case
+            energy_df: (pd.DataFrame) Energy dataframe in this case
+            weather_df: (pd.DataFrame) Weather dataframe in this case
 
         OUTPUT:
-            dframe: (pd.DataFrame) Concatenated dataframe
+            df: (pd.DataFrame) Concatenated dataframe
     """
-    # Concatenate the two dataframes based on the index
-    dframe = pd.concat([dataframe1, dataframe2], axis=0)
-    return dframe
+    # Ensure both dataframes use identical DatetimeIndex
+    energy = energy_df.copy()
+    weather = weather_df.copy()
+
+    # Outer join on index
+    df = energy.join(weather, how="outer")
+
+    # Sort newest-oldestr to match existing design
+    df.sort_index(ascending=False, inplace=True)
+
+    return df
 
 def main():
     # Get dataframes
@@ -222,6 +229,7 @@ def main():
     # Convert to datetime index
     proper_energy_df = make_datetime_index(energy_df)
 
+    breakpoint()
     # Merge dataframes int o one main dataframe
     dframe = combine_dataframes(proper_energy_df, weather_df)
 
@@ -229,7 +237,7 @@ def main():
     clean_obj = DataCleaning(dframe)
     col_summary = clean_obj.column_summary()
 
-
 if __name__ == "__main__":
+    start = time.time()
     main()
-print(f"Execution time: {time.time() - start}")
+    print(f"Execution time: {time.time() - start}")
