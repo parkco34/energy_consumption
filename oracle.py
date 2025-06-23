@@ -8,6 +8,7 @@ import os
 from nasa_power_api import NASAPowerAPI as api # Import NASA API Class
 import pandas as pd
 from data_utils.data_cleaning import DataCleaning
+import sys
 
 # List of common date-related keywords for columns
 DATE_KEYWORDS = ["month", "year", "date", "day", "time"]
@@ -191,8 +192,11 @@ def _get_weather_data(parameters, coordinates, year_range):
         return weather_data
    
     except Exception as e:
-        print(f"Something went wrong: {e}")
-        return None
+        print("========================================")
+        print(f"\n\nSomething went wrong: {e}\n\n")
+        print("========================================")
+        # If this doesn't work, piss off
+        exit()
 
 def combine_dataframes(energy_df, weather_df):
     """
@@ -213,8 +217,8 @@ def combine_dataframes(energy_df, weather_df):
     weather = weather_df.copy()
 
     # Outer join on index
+#    breakpoint()
     df = energy.join(weather, how="outer")
-
     # Sort newest-oldestr to match existing design
     df.sort_index(ascending=False, inplace=True)
 
@@ -229,7 +233,6 @@ def main():
     # Convert to datetime index
     proper_energy_df = make_datetime_index(energy_df)
 
-    breakpoint()
     # Merge dataframes int o one main dataframe
     dframe = combine_dataframes(proper_energy_df, weather_df)
 

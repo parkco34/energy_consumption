@@ -58,7 +58,7 @@ class NASAPowerAPI:
 
         # Build one URL per parameter
         self.base_urls = {
-            p: (f"https://power.larc.nasa.gov/api/temporal/monthly/regional"
+            p: (f"https://power.larc.nasa.gov/api/temporal/daily/regional"
                 f"?start=2001&end=2024&latitude-min={self.min_lat}"
                 f"&latitude-max={self.max_lat}&longitude-min={self.min_lon}"
                 f"&longitude-max={self.max_lon}&community=RE"
@@ -128,6 +128,7 @@ class NASAPowerAPI:
                 self.fetch_parameter(session, param, url)
                 for param, url in self.base_urls.items()
             ]
+            reakpoint()
             results = await asyncio.gather(*tasks)
 
         all_series = [s for sub in results for s in sub]
