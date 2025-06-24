@@ -217,7 +217,6 @@ def combine_dataframes(energy_df, weather_df):
     weather = weather_df.copy()
 
     # Outer join on index
-#    breakpoint()
     df = energy.join(weather, how="outer")
     # Sort newest-oldestr to match existing design
     df.sort_index(ascending=False, inplace=True)
