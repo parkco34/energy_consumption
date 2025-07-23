@@ -5,7 +5,8 @@ Oracle Project
 import time
 import os
 #from data_utils.data_cleaning import DataCleaning
-from nasa_power_api import NASAPowerAPI as api # Import NASA API Class
+#from nasa_power_api import NASAPowerAPI as api # Import NASA API Class
+from nasa_delete import NASAPowerAPI as api
 import pandas as pd
 from data_utils.data_cleaning import DataCleaning
 import sys
@@ -187,6 +188,7 @@ def _get_weather_data(parameters, coordinates, year_range):
     try:
         # Implement NASA Power API call
         nasa = api(parameters, coordinates, year_range)
+        breakpoint()
         # Weather data
         weather_data = nasa.get_weather_data()
         return weather_data
