@@ -2,11 +2,12 @@
 """
 Oracle Project
 """
+import traceback
+import sys
 import time
 import os
 #from data_utils.data_cleaning import DataCleaning
 #from nasa_power_api import NASAPowerAPI as api # Import NASA API Class
-from nasa_delete import NASAPowerAPI as api
 import pandas as pd
 from data_utils.data_cleaning import DataCleaning
 import sys
@@ -173,7 +174,7 @@ def make_datetime_index(dataframe):
    
     return new_df
     # 
-def _get_weather_data(parameters, coordinates, year_range):
+def _get_weather_data(date_range, coordinates, parameters):
     """
     Calls to NASA POWER API for weather data
     ------------------------------------------------
@@ -185,9 +186,12 @@ def _get_weather_data(parameters, coordinates, year_range):
     OUTPUT:
         weather_data: (pd.DataFrame) Weather dataframe via specific parameters
     """
+    # Import NasaAPI module
+    from nasa_api import NasaAPI as api
+
     try:
         # Implement NASA Power API call
-        nasa = api(parameters, coordinates, year_range)
+        nasa = api(date_range, coordinates, parameters)
         breakpoint()
         # Weather data
         weather_data = nasa.get_weather_data()
@@ -197,6 +201,20 @@ def _get_weather_data(parameters, coordinates, year_range):
         print("========================================")
         print(f"\n\nSomething went wrong: {e}\n\n")
         print("========================================")
+
+        # OUtput traceback information including filename and linenumber
+        exc_type, exc_value, exc_traceback = sys.exc_info()
+        tb_list = traceback.extract_tb(exc_traceback)
+        # Last element of traceback list, for the error location
+        error_location = tb_list[-1]
+
+        # Filename, line number output
+        filename = error_location.filename
+        proper_filename = filename.rpartition('/')[-1]
+        linenumber = error_location.lineno
+        print(f"Filename: '{proper_filename}'")
+        print(f"Error occurred @ line number: {linenumber}")
+
         # If this doesn't work, piss off
         exit()
 
