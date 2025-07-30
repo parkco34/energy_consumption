@@ -13,7 +13,7 @@ from data_utils.data_cleaning import DataCleaning
 import sys
 
 # List of common date-related keywords for columns
-DATE_KEYWORDS = ["month", "year", "date", "day", "time"]
+_DATE_KEYWORDS = ["month", "year", "date", "day", "time"]
 
 def read_energy_data(filename):
     """
@@ -33,16 +33,15 @@ def read_energy_data(filename):
         print(f"{filename} Doesn't exist in given path")
         return None
 
-def datetime_conversion(dataframe):
+def make_datetime_col(dataframe):
     """
     Converts the date-like columns to datetime into one 'date' column, if it
     doesn't already exist, using arbitrary values for 'month' and/or 'day' if
-    not already one of the dataframe columns
-    --------------------------------------------------
+    not already one of the dataframe columns.
+    ? -> Need to deal with the cases where there's a 'date' column already.
+    --------------------------------------------------------------------
     INPUT:
         dataframe: (pd.DataFrame) Original dataframe
-        sort_by_date: (bool; default=True) Whether to sort the dataframe by
-        datre or leave it as it is.
 
     OUTPUT:
         df: (pd.DataFrame) Datetime converted dataframe
@@ -55,6 +54,7 @@ def datetime_conversion(dataframe):
     # !-> If this is the case, return the original dataframe so as to preserve
     # memory!
     if isinstance(df.index, pd.DatetimeIndex):
+        print(f"\n\n{df.index} is DateTime index already!\n\n")
         # Remove date-like columns since the dataframe is already setup with a
         # datetime index
         # pdf.drop(labels=None, *, axis=0, index=None, columns=None, level=None, inplace=False, errors='raise')
@@ -62,13 +62,16 @@ def datetime_conversion(dataframe):
 
         return df
 
+    # If index in date format via strings, convert to datetime indices ??
+
     # Isolate the relevant column names, if any
-    year_col = [col.lower() for col in df.columns]
+    year_col = [col.lower() for col in df.columns if col.lower() == "year"]
     month_col =  [col.lower() for col in df.columns if col.lower() == "month"]
 
     try: # ? -> Refactor!
         # If there's no 'date' column, make it
         if "date" not in df.columns:
+            print(f"'date' not in dataframe columns: {df.columns}")
             # Separate year and month at least
             if year_col and month_col:
                 # Check for a 'day' column
@@ -121,8 +124,20 @@ def datetime_conversion(dataframe):
                         errors="coerce"
                     )
 
-    except Exception as e:
-        print(f"Issue with converting to datetime! {e}")
+            elif (not year_col) and (not month_col):
+                print(f"\n\nNo year_col and no month_col\n\n")
+                if any("day" in col.lower() for col in df.columns):
+                    day_col = [col.lower() for col in df.columns if col.lower()
+                              == "day"][0]
+                            
+                else:
+                    print(f"No year/month column: \nColumns: {df.columns}")
+
+        else:
+            print(f"'date' in the dataframe's columns: {df.columns}")
+
+    except KeyError as e:
+        print(f"KeyError!\nIssue with converting to datetime! {e}")
 
     return df
 
@@ -132,7 +147,7 @@ def make_datetime_index(dataframe):
     removing the other date-like columns.
     First, you must sort the datetime values in ascending (or whatevs) using,
         ;pd.sort_values(*, axis=0, ascending=True, inplace=False, kind='quicksort', 
-        na_position='last', ignore_index=False, key=None)
+        a_position='last', ignore_index=False, key=None)
         
     This is done by finding the datetime column and converting it to the index
     using, 
@@ -160,19 +175,20 @@ def make_datetime_index(dataframe):
     df = dataframe.copy()
 
     # Relevant date-like keywords
-    remove_cols = [col.lower() for col in df.columns if col in DATE_KEYWORDS]
+    remove_cols = [col.lower() for col in df.columns if col in _DATE_KEYWORDS]
 
-    # Convert relevant columns to datetime columns
-    converted_df = datetime_conversion(df)
+    # Add 'date' as datetime column in dataframe
+    df_with_date = make_datetime_col(df)
+    breakpoint()
     # Sort dates, ascending
-    new_df = converted_df.set_index("date", drop="date")
+    converted_df = df_with_date.set_index("date", drop="date")
     # Drop daete-like columns; no longer needed
-    new_df.drop(remove_cols, axis=1, inplace=True)
+    converted_df.drop(remove_cols, axis=1, inplace=True)
     
     # Sort the dataframe's index in descending order
-    new_df.sort_index(axis=0, ascending=False, inplace=True)
+    converted_df.sort_index(axis=0, ascending=False, inplace=True)
    
-    return new_df
+    return converted_df
     # 
 def _get_weather_data(date_range, coordinates, parameters):
     """
@@ -187,14 +203,12 @@ def _get_weather_data(date_range, coordinates, parameters):
         weather_data: (pd.DataFrame) Weather dataframe via specific parameters
     """
     # Import NasaAPI module
-    from nasa_api import NasaAPI as api
+    from nasa_api import fetch_weather
 
     try:
         # Implement NASA Power API call
-        nasa = api(date_range, coordinates, parameters)
-        breakpoint()
+        weather_data = fetch_weather(date_range, coordinates, parameters)
         # Weather data
-        weather_data = nasa.get_weather_data()
         return weather_data
    
     except Exception as e:
@@ -239,6 +253,7 @@ def combine_dataframes(energy_df, weather_df):
     # Outer join on index
     df = energy.join(weather, how="outer")
     # Sort newest-oldestr to match existing design
+    
     df.sort_index(ascending=False, inplace=True)
 
     return df
@@ -246,18 +261,24 @@ def combine_dataframes(energy_df, weather_df):
 def main():
     # Get dataframes
     energy_df = read_energy_data("data/raw/Utility_Energy_Registry_Monthly_County_Energy_Use__Beginning_2021_20241208.csv")
-    weather_df = _get_weather_data(["T2M,T2M_MAX,T2M_MIN,PRECTOTCORR,RH2M,"
-                  "ALLSKY_SFC_SW_DWN,CLOUD_AMT,WS10M,GWETROOT,QV2M,T2MWET"], (42, 44, -78, -76), (2001, 2024))
-
+    weather_df = _get_weather_data(
+        (2001, 2024), 
+        (42, -77), 
+        ["T2M","T2M_MAX","T2M_MIN","PRECTOTCORR","RH2M", 
+            "ALLSKY_SFC_SW_DWN","CLOUD_AMT","WS10M","GWETROOT","QV2M","T2MWET"]
+    )
+    
     # Convert to datetime index
-    proper_energy_df = make_datetime_index(energy_df)
+#    proper_energy_df = make_datetime_index(energy_df)
+    proper_weather_df = make_datetime_index(weather_df)
 
     # Merge dataframes int o one main dataframe
-    dframe = combine_dataframes(proper_energy_df, weather_df)
+    dframe = combine_dataframes(proper_energy_df, proper_weather_df)
 
     # Clean the data plz
     clean_obj = DataCleaning(dframe)
     col_summary = clean_obj.column_summary()
+
 
 if __name__ == "__main__":
     start = time.time()
