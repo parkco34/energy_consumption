@@ -3,6 +3,7 @@
 Oracle Project
 """
 import traceback
+import re
 import sys
 import time
 import os
@@ -48,7 +49,6 @@ def make_datetime_col(dataframe):
     """
     # Create a copy of dataframe
     df = dataframe.copy()
-
     # Ensure that the index isn't already datetime and any date-like columns
     # aren't already datetime !
     # !-> If this is the case, return the original dataframe so as to preserve
@@ -62,7 +62,29 @@ def make_datetime_col(dataframe):
 
         return df
 
-    # If index in date format via strings, convert to datetime indices ??
+    # If index in date format via strings, convert to datetime indices
+    elif isinstance(df.index[0], str): # ? More conditions needed, obviously
+        # Check if format is same as "YYYY-MM-DD"
+        # 1900's or 2000's, valid two-digit month
+        pattern = re.compile(r"^(19|20)\d{2}(0[1-9]|1[0-2])$")
+        if df.index.to_series().apply(pattern.fullmatch).all():
+            # Remove all invalid dates (13-months) via mask
+            good_mask = df.index.str.match(pattern)
+            # New dataframe without invalid months
+            df = df[good_mask]
+
+            # Create 'date' column with appropriate formatting
+            dates = df.index.to_series().apply(lambda x: x[:4] + "-"+ x[4:7] + "-" + "01")
+            # Add to the dataframe
+            df["date"] = dates
+            
+            # Convert to datetime
+            df["date"] = pd.to_datetime(df["date"], format="%Y-%m-%d")
+
+        # Replace indices with datetime indices and delete the 'date' column
+        df.index = df["date"]
+
+        return df
 
     # Isolate the relevant column names, if any
     year_col = [col.lower() for col in df.columns if col.lower() == "year"]
@@ -71,7 +93,6 @@ def make_datetime_col(dataframe):
     try: # ? -> Refactor!
         # If there's no 'date' column, make it
         if "date" not in df.columns:
-            print(f"'date' not in dataframe columns: {df.columns}")
             # Separate year and month at least
             if year_col and month_col:
                 # Check for a 'day' column
@@ -131,7 +152,7 @@ def make_datetime_col(dataframe):
                               == "day"][0]
                             
                 else:
-                    print(f"No year/month column: \nColumns: {df.columns}")
+                    print(f"\n\nNo year/month column: \nColumns: {df.columns}\n\n")
 
         else:
             print(f"'date' in the dataframe's columns: {df.columns}")
@@ -179,7 +200,7 @@ def make_datetime_index(dataframe):
 
     # Add 'date' as datetime column in dataframe
     df_with_date = make_datetime_col(df)
-    breakpoint()
+    
     # Sort dates, ascending
     converted_df = df_with_date.set_index("date", drop="date")
     # Drop daete-like columns; no longer needed
@@ -246,17 +267,33 @@ def combine_dataframes(energy_df, weather_df):
         OUTPUT:
             df: (pd.DataFrame) Concatenated dataframe
     """
-    # Ensure both dataframes use identical DatetimeIndex
-    energy = energy_df.copy()
-    weather = weather_df.copy()
+    def align_to_month(dataframe):
+        """
+        Inner function to convert datetime index to month-ending periods and
+        back to cannonical date.
+        ------------------------------------------------
+        INPUT:
+            dataframe: (pd.DataFrame) DataFrame to change.
 
-    # Outer join on index
-    df = energy.join(weather, how="outer")
-    # Sort newest-oldestr to match existing design
-    
-    df.sort_index(ascending=False, inplace=True)
+        OUTPUT:
+            df: (pd.DataFrame) Sorted/modified dataframe
+        """
+        # Copy dataframes
+        df = dataframe.copy
+        # Convert to PeriodIndex at monthly frequency using
+        # pd.DatetimeIndex.to_period function
+        dframe = df.index.to_period("M")
+        # Choose first dat of month
+        dfframe.index = dframe.index.to_timestamp("M")
 
-    return df
+        return dframe.sort_index()
+
+    # Energy/Weather dataframes
+    energy_aligned = align_to_month(energy_df)
+    weather_aligned = align_to_month(weather_df)
+
+    # Inner join keeps only months present
+
 
 def main():
     # Get dataframes
@@ -269,18 +306,18 @@ def main():
     )
     
     # Convert to datetime index
-#    proper_energy_df = make_datetime_index(energy_df)
+    proper_energy_df = make_datetime_index(energy_df)
     proper_weather_df = make_datetime_index(weather_df)
 
     # Merge dataframes int o one main dataframe
     dframe = combine_dataframes(proper_energy_df, proper_weather_df)
+    breakpoint()
 
     # Clean the data plz
-    clean_obj = DataCleaning(dframe)
-    col_summary = clean_obj.column_summary()
+#    clean_obj = DataCleaning(dframe)
+#    col_summary = clean_obj.column_summary()
+#    print(f"Column Summary: \n{col_summary}")
 
 
 if __name__ == "__main__":
-    start = time.time()
     main()
-    print(f"Execution time: {time.time() - start}")
