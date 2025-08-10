@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 """
-Oracle Project
+Oracle Project -- Needs refactoring, obviously ... 
 """
 import traceback
 import re
@@ -59,7 +59,7 @@ def make_datetime_col(dataframe):
         # datetime index
         # pdf.drop(labels=None, *, axis=0, index=None, columns=None, level=None, inplace=False, errors='raise')
         df.drop(cols, axis=1, inplace=True)
-
+        
         return df
 
     # If index in date format via strings, convert to datetime indices
@@ -83,7 +83,7 @@ def make_datetime_col(dataframe):
 
         # Replace indices with datetime indices and delete the 'date' column
         df.index = df["date"]
-
+        
         return df
 
     # Isolate the relevant column names, if any
@@ -210,7 +210,26 @@ def make_datetime_index(dataframe):
     converted_df.sort_index(axis=0, ascending=False, inplace=True)
    
     return converted_df
-    # 
+
+def datetime_index_corrections(df1, df2):
+    """
+    Makes any needed corrections to the datetime index of the dataframes prior
+    to merging to ensure we get a proper dataframe at the end.
+    --------------------------------------------------------
+    INPUT:
+        df1: (pd.DataFrame) 
+        df2: (pd.DataFrame)
+
+    OUTPUT:
+        df1, df2: (tuple of dataframes)
+    """
+    # Check if the two dataframes matching data via indices
+    if not list(df1.index.intersection(df2.index)):
+        df1.index = df1.index.to_period("M")
+        df2.index = df2.index.to_period("M")
+    
+    return df1, df2
+    
 def _get_weather_data(date_range, coordinates, parameters):
     """
     Calls to NASA POWER API for weather data
@@ -267,39 +286,27 @@ def combine_dataframes(energy_df, weather_df):
         OUTPUT:
             df: (pd.DataFrame) Concatenated dataframe
     """
-    def align_to_month(dataframe):
-        """
-        Inner function to convert datetime index to month-ending periods and
-        back to cannonical date.
-        ------------------------------------------------
-        INPUT:
-            dataframe: (pd.DataFrame) DataFrame to change.
+    # copies
+    energy = energy_df.copy()
+    weather = weather_df.copy()
 
-        OUTPUT:
-            df: (pd.DataFrame) Sorted/modified dataframe
-        """
-        # Copy dataframes
-        df = dataframe.copy
-        # Convert to PeriodIndex at monthly frequency using
-        # pd.DatetimeIndex.to_period function
-        dframe = df.index.to_period("M")
-        # Choose first dat of month
-        dfframe.index = dframe.index.to_timestamp("M")
+    # Merge dataframes ensuring only intersection of indices are included ?
+    df = pd.merge(
+        energy, 
+        weather, 
+        left_index=True,
+        right_index=True,
+        how="inner"
+    )
 
-        return dframe.sort_index()
-
-    # Energy/Weather dataframes
-    energy_aligned = align_to_month(energy_df)
-    weather_aligned = align_to_month(weather_df)
-
-    # Inner join keeps only months present
+    return df
 
 
 def main():
     # Get dataframes
     energy_df = read_energy_data("data/raw/Utility_Energy_Registry_Monthly_County_Energy_Use__Beginning_2021_20241208.csv")
     weather_df = _get_weather_data(
-        (2001, 2024), 
+        (2021, 2024), 
         (42, -77), 
         ["T2M","T2M_MAX","T2M_MIN","PRECTOTCORR","RH2M", 
             "ALLSKY_SFC_SW_DWN","CLOUD_AMT","WS10M","GWETROOT","QV2M","T2MWET"]
@@ -309,10 +316,12 @@ def main():
     proper_energy_df = make_datetime_index(energy_df)
     proper_weather_df = make_datetime_index(weather_df)
 
-    # Merge dataframes int o one main dataframe
-    dframe = combine_dataframes(proper_energy_df, proper_weather_df)
-    breakpoint()
+    # Make corrections to dataframe indices if needed
+    df1, df2 = datetime_index_corrections(proper_energy_df, proper_weather_df)
 
+    # Merge dataframes int o one main dataframe
+    dframe = combine_dataframes(df1, df2)
+#    breakpoint()
     # Clean the data plz
 #    clean_obj = DataCleaning(dframe)
 #    col_summary = clean_obj.column_summary()
