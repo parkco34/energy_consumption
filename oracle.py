@@ -301,9 +301,10 @@ def combine_dataframes(energy_df, weather_df):
 
     return df
 
-
 def main():
     # Get dataframes
+    # ? --> Need to figure out how to manage the counties with the proper
+    # weather coordinates ?
     energy_df = read_energy_data("data/raw/Utility_Energy_Registry_Monthly_County_Energy_Use__Beginning_2021_20241208.csv")
     weather_df = _get_weather_data(
         (2021, 2024), 
@@ -321,7 +322,7 @@ def main():
 
     # Merge dataframes int o one main dataframe
     dframe = combine_dataframes(df1, df2)
-#    breakpoint()
+    breakpoint()
     # Clean the data plz
 #    clean_obj = DataCleaning(dframe)
 #    col_summary = clean_obj.column_summary()

@@ -84,6 +84,9 @@ def fetch_weather(date_range,
                   coordinates,
                   parameters):
     """
+    ? -> Swap coordinates with FIP codes !?
+    ? -> How does this function work???
+
     Synchronous one-liner ideal for caller who just want the DataFrme.
     """
     return NasaAPI(date_range, coordinates, parameters).fetch()
@@ -108,6 +111,7 @@ if __name__ == "__main__":
     t0 = time.perf_counter()
     # Get dataframe of weather data
     df_demo = fetch_weather((2001, 2024), (42.5, -77), parameters)
+    breakpoint()
     delt_t = time.perf_counter() - t0
     print(f"{df_demo.head()}")
 
