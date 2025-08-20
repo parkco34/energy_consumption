@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 """
 Oracle Project -- Needs refactoring, obviously ... 
+Where I got the coordinates for the FIPS codes:
+    External Data: https://www.census.gov/geographies/reference-files/time-series/geo/gazetteer-files.2022.html#list-tab-264479560
 """
 import traceback
 import re
@@ -33,6 +35,31 @@ def read_energy_data(filename):
     else:
         print(f"{filename} Doesn't exist in given path")
         return None
+
+def read_fips_county_data(filename):
+    """
+    Reads external data for weather FIPS codes to be mapped to appropriate
+    coorindates.
+    --------------------------------------------------------------------
+    INPUT:
+        filename: (str) Filename (absolute path)
+
+    OUTPUT:
+        df: (pd.DataFrame) Weather dataframe with FIPS and coordinates
+    """
+    # Read file
+    df = pd.read_csv(filename, sep="\t", on_bad_lines="skip")
+    # Correct dataframe columns
+    df.columns = df.columns.str.strip()
+    return df
+
+def fips_filter(dataframe):
+    """
+    Iterates over the dataframe storing the coordinates for each FIPS code,
+    returning the weather dataframe as a collection of all the dataframes for
+    each FIPS code.
+    """
+    pass
 
 def make_datetime_col(dataframe):
     """
@@ -248,7 +275,17 @@ def _get_weather_data(date_range, coordinates, parameters):
     try:
         # Implement NASA Power API call
         weather_data = fetch_weather(date_range, coordinates, parameters)
-        # Weather data
+
+        # Read external data file for mapping FIPS to coordinates
+        county_df = read_fips_county_data("./data/external/2022_Gaz_116CDs_national.txt")
+        # Isolate FIPS codes and coordinates
+        fips_df = county_df[["GEOID", "INTPTLAT", "INTPTLONG"]]
+        # Obtain New York FIPS codes and coordinates
+        ny_fips = fips_df[fips_df["GEOID"].str.startswith("36")]
+        # reset index, dropping original
+        ny_fips.reset_index(drop=True, inplace=True)
+        
+        breakpoint()
         return weather_data
    
     except Exception as e:
@@ -271,6 +308,34 @@ def _get_weather_data(date_range, coordinates, parameters):
 
         # If this doesn't work, piss off
         exit()
+
+def load_fips_coords(path_to_file, prefix_fips):
+    """
+    Loads FIPS reference, keeping GEOID and the coordinates and optionally
+    filters by state prefix (e.g. "36" for NY).
+    Returns a df with columns: ['fips', 'lat', 'lon'] and integer/string FIPS
+    preserved.
+    ----------------------------------------------------------------------
+    INPUT:
+        path_to_file: (str) Absolute/Relative path.
+        prefix_fips: (str) Prefx number of FIPS
+
+    OUTPUT:
+        df: (pd.DataFrame) DataFrame with ?
+    """
+    # Read data from external data file
+    df = read_fips_county_data(path_to_file)
+
+    # Keep only the columns needed'
+    cols = ["GEOID", "INTPTLAT", "INTPTLONG"]
+    missing = [c for c in need if c not in df.columns]
+
+    # Ensure dataframe has the columns we need
+    if missing:
+        raise ValueError(f"FIPS file missing columns: {missing}")
+
+    # ? 
+
 
 def combine_dataframes(energy_df, weather_df):
     """
@@ -306,6 +371,7 @@ def main():
     # ? --> Need to figure out how to manage the counties with the proper
     # weather coordinates ?
     energy_df = read_energy_data("data/raw/Utility_Energy_Registry_Monthly_County_Energy_Use__Beginning_2021_20241208.csv")
+
     weather_df = _get_weather_data(
         (2021, 2024), 
         (42, -77), 
@@ -322,7 +388,6 @@ def main():
 
     # Merge dataframes int o one main dataframe
     dframe = combine_dataframes(df1, df2)
-    breakpoint()
     # Clean the data plz
 #    clean_obj = DataCleaning(dframe)
 #    col_summary = clean_obj.column_summary()
