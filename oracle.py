@@ -256,7 +256,40 @@ def datetime_index_corrections(df1, df2):
         df2.index = df2.index.to_period("M")
     
     return df1, df2
-    
+   
+# ================== WEATHER DATA =======================================
+def load_fips_coords(external_datafile, state=None):
+    """
+    Loads the fips/county data and filters (optionally) based on the state
+    needed.
+    ----------------------------------------------------------------------
+    INPUT:
+        external_datafile:(str) Absolute/relatice path ? to external data file.
+        state: (str) Acronymn for fir state wanted.
+
+    OUTPUT:
+        state_df: (pd.DataFrame) Dataframe with state's fips codes, latitude
+        and longitudinal coordinates for later merging with NASA POWER API
+        weather data.
+    """
+    # Load external data
+    df = read_fips_county_data(external_datafile)
+
+    # Rename columns of dataframe (e.g. 'GEOID' to 'FIPS')
+    df.rename(columns={"GEOID": "fips", "INTPTLAT": "lat", "INTPTLONG": "lon"},
+             inplace=True)
+   
+    # Filter depending on state chosen
+    if state:
+        state_data = df[df["USPS"] == state]
+        # REset inde
+        state_data.reset_index(inplace=True)
+        # Only keeping proper columns
+        state_df =  state_data[["fips", "lat", "lon"]]
+
+    return state_df
+
+
 def _get_weather_data(date_range, coordinates, parameters):
     """
     Calls to NASA POWER API for weather data
@@ -277,15 +310,15 @@ def _get_weather_data(date_range, coordinates, parameters):
         weather_data = fetch_weather(date_range, coordinates, parameters)
 
         # Read external data file for mapping FIPS to coordinates
-        county_df = read_fips_county_data("./data/external/2022_Gaz_116CDs_national.txt")
-        # Isolate FIPS codes and coordinates
-        fips_df = county_df[["GEOID", "INTPTLAT", "INTPTLONG"]]
-        # Obtain New York FIPS codes and coordinates
-        ny_fips = fips_df[fips_df["GEOID"].str.startswith("36")]
-        # reset index, dropping original
-        ny_fips.reset_index(drop=True, inplace=True)
-        
-        breakpoint()
+#        county_df = read_fips_county_data("./data/external/2022_Gaz_116CDs_national.txt")
+#        
+#        # Isolate FIPS codes and coordinates
+#        fips_df = county_df[["GEOID", "INTPTLAT", "INTPTLONG"]]
+#        # Obtain New York FIPS codes and coordinates
+#        ny_fips = fips_df[fips_df["GEOID"].str.startswith("36")]
+#        # reset index, dropping original
+#        ny_fips.reset_index(drop=True, inplace=True)
+#        breakpoint()
         return weather_data
    
     except Exception as e:
@@ -299,49 +332,22 @@ def _get_weather_data(date_range, coordinates, parameters):
         # Last element of traceback list, for the error location
         error_location = tb_list[-1]
 
-        # Filename, line number output
-        filename = error_location.filename
-        proper_filename = filename.rpartition('/')[-1]
-        linenumber = error_location.lineno
-        print(f"Filename: '{proper_filename}'")
-        print(f"Error occurred @ line number: {linenumber}")
+    # Merge dataframes ensuring only intersection of indices are included ?
+    df = pd.merge(
+        energy, 
+        weather, 
+        left_index=True,
+        right_index=True,
+        how="inner"
+    )
 
-        # If this doesn't work, piss off
-        exit()
-
-def load_fips_coords(path_to_file, prefix_fips):
-    """
-    Loads FIPS reference, keeping GEOID and the coordinates and optionally
-    filters by state prefix (e.g. "36" for NY).
-    Returns a df with columns: ['fips', 'lat', 'lon'] and integer/string FIPS
-    preserved.
-    ----------------------------------------------------------------------
-    INPUT:
-        path_to_file: (str) Absolute/Relative path.
-        prefix_fips: (str) Prefx number of FIPS
-
-    OUTPUT:
-        df: (pd.DataFrame) DataFrame with ?
-    """
-    # Read data from external data file
-    df = read_fips_county_data(path_to_file)
-
-    # Keep only the columns needed'
-    cols = ["GEOID", "INTPTLAT", "INTPTLONG"]
-    missing = [c for c in need if c not in df.columns]
-
-    # Ensure dataframe has the columns we need
-    if missing:
-        raise ValueError(f"FIPS file missing columns: {missing}")
-
-    # ? 
-
+    return df
 
 def combine_dataframes(energy_df, weather_df):
     """
     Combines the two dataframes using
-        'pd..concat(objs, *, axis=0, join='outer', ignore_index=False, 
-        keys=None, levels=None, names=None, verify_integrity=False, 
+        'pd..concat(objs, *, axis=0, join='outer', ignore_index=False,
+        keys=None, levels=None, names=None, verify_integrity=False,
         sort=False, copy=None)'
         ---------------------------------------------------------------
         INPUT:
@@ -357,8 +363,8 @@ def combine_dataframes(energy_df, weather_df):
 
     # Merge dataframes ensuring only intersection of indices are included ?
     df = pd.merge(
-        energy, 
-        weather, 
+        energy,
+        weather,
         left_index=True,
         right_index=True,
         how="inner"
@@ -385,6 +391,10 @@ def main():
 
     # Make corrections to dataframe indices if needed
     df1, df2 = datetime_index_corrections(proper_energy_df, proper_weather_df)
+
+    # ?
+    fips_df = load_fips_coords("./data/external/2022_Gaz_116CDs_national.txt",
+                              "NY")
 
     # Merge dataframes int o one main dataframe
     dframe = combine_dataframes(df1, df2)
