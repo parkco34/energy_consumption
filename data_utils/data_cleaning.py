@@ -58,7 +58,7 @@ class DataCleaning(object):
         # ------------------------------------------------------------------------------------------------------
         # Initialize summary dataframe
         summary_rows = []
-
+        total_rows = len(self.dataframe)
         # Iterating thru dataframe columns, getting appropriate metrics for data wrangling
         for col in self.dataframe.columns:
             column_name = col
@@ -112,12 +112,25 @@ class DataCleaning(object):
 
         return summary_df
 
-    def drop_missing_columns(self, thrshold=0.5):
+    def drop_missing_columns(self, threshold=0.5):
         """
-        Drops columns whose missing-value rate exceeds 'threshold'
+        Drops columns where proportion of missing data exceeds threhsold.
+        -------------------------------------------------
+        INPUT:
+            threshold: (float) Proportion of missing data required to drop.
+
+        OUTPUT:
+            self: Method chaining
         """
-        self.dataframe = self.dataframe.loc[:, self.dataframe.isnull().mean()
-                                            <= threshold]
+        # Find column to drop
+        drop_columns = self.dataframe.columns[self.dataframe.isnull().mean() > threshold].tolist()
+
+        # OUtput to user
+        if drop_columns:
+            print(f"Dropping columns: {drop_columns}")
+
+        else:
+            print("No columns to drop - BELOW THRESHOLD")
 
         return self # Method chaining
 
@@ -366,3 +379,18 @@ class DataCleaning(object):
         plt.title("Monthly Energy Consumption Over Time")
         plt.xticks(rotation=45)
         plt.show()
+
+
+if __name__ == "__main__":
+    data = {
+    'Name': ['Alice', 'Bob', 'Charlie', 'David', 'Eve'],
+    'Age': np.random.randint(20, 60, size=5),
+    'City': ['New York', 'London', 'Paris', 'Tokyo', 'Sydney'],
+    'Score': np.random.uniform(70, 100, size=5).round(2)
+}
+
+    # Create the DataFrame
+    mock_df = pd.DataFrame(data)
+    dc = DataCleaning(mock_df)
+    dc.drop_missing_columns()
+

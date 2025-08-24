@@ -86,6 +86,7 @@ def fetch_weather(date_range,
     """
     ? -> Swap coordinates with FIP codes !?
     ? -> How does this function work???
+    ? -> Iterate over multiple coordinates!
 
     Synchronous one-liner ideal for caller who just want the DataFrme.
     """
@@ -95,7 +96,7 @@ def fetch_weather(date_range,
 
 if __name__ == "__main__":
     import time
-
+    # ?
     parameters = ["T2M",
                   "T2M_MAX",
                   "T2M_MIN",

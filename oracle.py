@@ -53,14 +53,6 @@ def read_fips_county_data(filename):
     df.columns = df.columns.str.strip()
     return df
 
-def fips_filter(dataframe):
-    """
-    Iterates over the dataframe storing the coordinates for each FIPS code,
-    returning the weather dataframe as a collection of all the dataframes for
-    each FIPS code.
-    """
-    pass
-
 def make_datetime_col(dataframe):
     """
     Converts the date-like columns to datetime into one 'date' column, if it
@@ -289,7 +281,6 @@ def load_fips_coords(external_datafile, state=None):
 
     return state_df
 
-
 def _get_weather_data(date_range, coordinates, parameters):
     """
     Calls to NASA POWER API for weather data
@@ -374,13 +365,16 @@ def combine_dataframes(energy_df, weather_df):
 
 def main():
     # Get dataframes
+    # ?
+    fips_df = load_fips_coords("./data/external/2022_Gaz_116CDs_national.txt",
+                              "NY")
     # ? --> Need to figure out how to manage the counties with the proper
     # weather coordinates ?
     energy_df = read_energy_data("data/raw/Utility_Energy_Registry_Monthly_County_Energy_Use__Beginning_2021_20241208.csv")
 
     weather_df = _get_weather_data(
         (2021, 2024), 
-        (42, -77), 
+        (42, -77),  # ? Needs to get all coordinates!
         ["T2M","T2M_MAX","T2M_MIN","PRECTOTCORR","RH2M", 
             "ALLSKY_SFC_SW_DWN","CLOUD_AMT","WS10M","GWETROOT","QV2M","T2MWET"]
     )
@@ -391,13 +385,9 @@ def main():
 
     # Make corrections to dataframe indices if needed
     df1, df2 = datetime_index_corrections(proper_energy_df, proper_weather_df)
-
-    # ?
-    fips_df = load_fips_coords("./data/external/2022_Gaz_116CDs_national.txt",
-                              "NY")
-
     # Merge dataframes int o one main dataframe
     dframe = combine_dataframes(df1, df2)
+    breakpoint()
     # Clean the data plz
 #    clean_obj = DataCleaning(dframe)
 #    col_summary = clean_obj.column_summary()
