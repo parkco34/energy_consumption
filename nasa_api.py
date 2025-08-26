@@ -89,8 +89,21 @@ def fetch_weather(date_range,
     ? -> Iterate over multiple coordinates!
 
     Synchronous one-liner ideal for caller who just want the DataFrme.
+    ------------------------------------------------------------------
+    INPUT:
+        date_range: (tuple) Start and end dates
+        coordinates: (pd.Series) Tabular data of coordinates
+        parameters: (list of strings) Strings ?
+
+    OUTPUT:
+        NasaAPI
     """
-    return NasaAPI(date_range, coordinates, parameters).fetch()
+    for idx in range(len(coordinates[["lat", "lon"]])):
+        # Assign latitude and longitude
+        lat, lon = (coordinates.loc[idx][["lat", "lon"]]["lat"],
+            coordinates.loc[idx][["lat", "lon"]]["lon"])
+        
+        return NasaAPI(date_range, (lat, lon), parameters).fetch()
 
 
 
