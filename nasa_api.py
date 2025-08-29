@@ -92,7 +92,7 @@ def fetch_weather(date_range,
     ------------------------------------------------------------------
     INPUT:
         date_range: (tuple) Start and end dates
-        coordinates: (pd.Series) Tabular data of coordinates
+        coordinates: (pd.DataFrame) Tabular data of coordinates
         parameters: (list of strings) Strings ?
 
     OUTPUT:
@@ -110,6 +110,55 @@ def fetch_weather(date_range,
 if __name__ == "__main__":
     import time
     # ?
+    def read_fips_county_data(filename):
+        """
+        Reads external data for weather FIPS codes to be mapped to appropriate
+        coorindates.
+        --------------------------------------------------------------------
+        INPUT:
+            filename: (str) Filename (absolute path)
+
+        OUTPUT:
+            df: (pd.DataFrame) Weather dataframe with FIPS and coordinates
+        """
+        # Read file
+        df = pd.read_csv(filename, sep="\t", on_bad_lines="skip")
+        # Correct dataframe columns
+        df.columns = df.columns.str.strip()
+        return df
+
+    def load_fips_coords(external_datafile, state=None):
+        """
+        Loads the fips/county data and filters (optionally) based on the state
+        needed.
+        ----------------------------------------------------------------------
+        INPUT:
+            external_datafile:(str) Absolute/relatice path ? to external data file.
+            state: (str) Acronymn for fir state wanted.
+
+        OUTPUT:
+            state_df: (pd.DataFrame) Dataframe with state's fips codes, latitude
+            and longitudinal coordinates for later merging with NASA POWER API
+            weather data.
+        """
+        # Load external data
+        df = read_fips_county_data(external_datafile)
+
+        # Rename columns of dataframe (e.g. 'GEOID' to 'FIPS')
+        df.rename(columns={"GEOID": "fips", "INTPTLAT": "lat", "INTPTLONG": "lon"},
+                 inplace=True)
+       
+        # Filter depending on state chosen
+        if state:
+            state_data = df[df["USPS"] == state]
+            # REset inde
+            state_data.reset_index(inplace=True)
+            # Only keeping proper columns
+            state_df =  state_data[["fips", "lat", "lon"]]
+
+        return state_df
+
+
     parameters = ["T2M",
                   "T2M_MAX",
                   "T2M_MIN",
@@ -123,8 +172,11 @@ if __name__ == "__main__":
                   "T2MWET"]
 
     t0 = time.perf_counter()
+    
+    # Load FIPS coordinates from external file
+    fips_df = load_fips_coords("./data/external/2022_Gaz_116CDs_national.txt", "NY")
     # Get dataframe of weather data
-    df_demo = fetch_weather((2001, 2024), (42.5, -77), parameters)
+    df_demo = fetch_weather((2001, 2024), fips_df, parameters)
     delt_t = time.perf_counter() - t0
     print(f"{df_demo.head()}")
 

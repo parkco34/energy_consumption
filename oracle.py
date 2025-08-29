@@ -366,14 +366,13 @@ def combine_dataframes(energy_df, weather_df):
 def main():
     # Get dataframes
     # ?
-    fips_df = load_fips_coords("./data/external/2022_Gaz_116CDs_national.txt",
-                              "NY")
+    fips_df = load_fips_coords("./data/external/2022_Gaz_116CDs_national.txt", "NY")
     # ? --> Need to figure out how to manage the counties with the proper
     # weather coordinates ?
     energy_df = read_energy_data("data/raw/Utility_Energy_Registry_Monthly_County_Energy_Use__Beginning_2021_20241208.csv")
 
     weather_df = _get_weather_data(
-        (2021, 2024), 
+        fips_df, 
         (42, -77),  # ? Needs to get all coordinates!
         ["T2M","T2M_MAX","T2M_MIN","PRECTOTCORR","RH2M", 
             "ALLSKY_SFC_SW_DWN","CLOUD_AMT","WS10M","GWETROOT","QV2M","T2MWET"]
