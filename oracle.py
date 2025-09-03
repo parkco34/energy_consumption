@@ -51,6 +51,7 @@ def read_fips_county_data(filename):
     df = pd.read_csv(filename, sep="\t", on_bad_lines="skip")
     # Correct dataframe columns
     df.columns = df.columns.str.strip()
+    breakpoint()
     return df
 
 def make_datetime_col(dataframe):
@@ -266,7 +267,7 @@ def load_fips_coords(external_datafile, state=None):
     """
     # Load external data
     df = read_fips_county_data(external_datafile)
-
+    
     # Rename columns of dataframe (e.g. 'GEOID' to 'FIPS')
     df.rename(columns={"GEOID": "fips", "INTPTLAT": "lat", "INTPTLONG": "lon"},
              inplace=True)
@@ -370,7 +371,7 @@ def main():
     # ? --> Need to figure out how to manage the counties with the proper
     # weather coordinates ?
     energy_df = read_energy_data("data/raw/Utility_Energy_Registry_Monthly_County_Energy_Use__Beginning_2021_20241208.csv")
-
+#    breakpoint()
     weather_df = _get_weather_data(
         fips_df, 
         (42, -77),  # ? Needs to get all coordinates!
@@ -386,7 +387,6 @@ def main():
     df1, df2 = datetime_index_corrections(proper_energy_df, proper_weather_df)
     # Merge dataframes int o one main dataframe
     dframe = combine_dataframes(df1, df2)
-    breakpoint()
     # Clean the data plz
 #    clean_obj = DataCleaning(dframe)
 #    col_summary = clean_obj.column_summary()
