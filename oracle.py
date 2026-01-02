@@ -51,7 +51,7 @@ def read_fips_county_data(filename):
     df = pd.read_csv(filename, sep="\t", on_bad_lines="skip")
     # Correct dataframe columns
     df.columns = df.columns.str.strip()
-    breakpoint()
+    
     return df
 
 def make_datetime_col(dataframe):
@@ -213,7 +213,11 @@ def make_datetime_index(dataframe):
         with no other date-like columns unless neccessary
     """
     # Copy dataframe
-    df = dataframe.copy()
+    if isinstance(dataframe, pd.DataFrame):
+        df = dataframe.copy()
+
+    else:
+        raise ValueError(f"\n\n{23*'+'}\nInvalid input:\nThis is not a DataFrame!\n{23*'+'}\n")
 
     # Relevant date-like keywords
     remove_cols = [col.lower() for col in df.columns if col in _DATE_KEYWORDS]
@@ -296,7 +300,7 @@ def _get_weather_data(date_range, coordinates, parameters):
     """
     # Import NasaAPI module
     from nasa_api import fetch_weather
-
+    
     try:
         # Implement NASA Power API call
         weather_data = fetch_weather(date_range, coordinates, parameters)
@@ -310,7 +314,7 @@ def _get_weather_data(date_range, coordinates, parameters):
 #        ny_fips = fips_df[fips_df["GEOID"].str.startswith("36")]
 #        # reset index, dropping original
 #        ny_fips.reset_index(drop=True, inplace=True)
-#        breakpoint()
+#        
         return weather_data
    
     except Exception as e:
@@ -324,16 +328,15 @@ def _get_weather_data(date_range, coordinates, parameters):
         # Last element of traceback list, for the error location
         error_location = tb_list[-1]
 
-    # Merge dataframes ensuring only intersection of indices are included ?
-    df = pd.merge(
-        energy, 
-        weather, 
-        left_index=True,
-        right_index=True,
-        how="inner"
-    )
+        filename = error_location.filename
+        proper_filename = filename.rpartition("/")[-1]
+        linenumber = error_location.lineno
+        print(f"Filename: {proper_filename}")
+        print(f"Error occurred @ line numner: {linenumber}")
 
-    return df
+        # Raise an exception silently
+
+    return None
 
 def combine_dataframes(energy_df, weather_df):
     """
@@ -367,14 +370,14 @@ def combine_dataframes(energy_df, weather_df):
 def main():
     # Get dataframes
     # ?
-    fips_df = load_fips_coords("./data/external/2022_Gaz_116CDs_national.txt", "NY")
+    fips_df = load_fips_coords("./data/external/2022_Gaz_counties_national.txt", "NY")
     # ? --> Need to figure out how to manage the counties with the proper
     # weather coordinates ?
     energy_df = read_energy_data("data/raw/Utility_Energy_Registry_Monthly_County_Energy_Use__Beginning_2021_20241208.csv")
-#    breakpoint()
+#    
     weather_df = _get_weather_data(
+        (2021, 2024),
         fips_df, 
-        (42, -77),  # ? Needs to get all coordinates!
         ["T2M","T2M_MAX","T2M_MIN","PRECTOTCORR","RH2M", 
             "ALLSKY_SFC_SW_DWN","CLOUD_AMT","WS10M","GWETROOT","QV2M","T2MWET"]
     )
